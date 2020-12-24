@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Example</title>
+</head>
+
+<body>
+  <h1>Example</h1>
+  <section>
+    <h2>config</h2>
+    <section>
+      <h3>language</h3>
+      <table>
+        <tbody>
+          <tr>
+            <th>default</th>
+            <td>
+              <?= lang('Pager.pageNavigation') ?>
+            </td>
+          </tr>
+          <tr>
+            <th>en</th>
+            <td>
+              <?= lang('Pager.pageNavigation', [], 'en') ?>
+            </td>
+          </tr>
+          <tr>
+            <th>ja</th>
+            <td>
+              <?= lang('Pager.pageNavigation', [], 'ja') ?>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h3>timezone</h3>
+      <table>
+        <tbody>
+          <tr>
+            <th>dateTime</th>
+            <td>
+              <?= date('Y-m-d H:i:s') ?>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </section>
+</body>
+
+</html>

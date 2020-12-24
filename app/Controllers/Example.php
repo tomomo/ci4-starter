@@ -10,11 +10,11 @@
 namespace App\Controllers;
 
 /**
- * Class Home
+ * Class Example
  *
  * @package CodeIgniter
  */
-class Home extends BaseController
+class Example extends BaseController
 {
 	/**
 	 * Welcomepage
@@ -23,6 +23,6 @@ class Home extends BaseController
 	 */
 	public function index()
 	{
-		return view('welcome_message');
+		return view('example.html');
 	}
 }
