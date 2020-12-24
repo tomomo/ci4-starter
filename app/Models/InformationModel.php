@@ -52,8 +52,8 @@ class InformationModel extends \CodeIgniter\Model
 	 * @var $allowedFields
 	 */
 	protected $allowedFields = [
-		'title',
-		'text',
+		'subject',
+		'message',
 	];
 	/**
 	 * ヴァリデーションルール
@@ -61,8 +61,8 @@ class InformationModel extends \CodeIgniter\Model
 	 * @var $allowedFields
 	 */
 	protected $validationRules = [
-		'title' => 'required|max_length[100]',
-		'text'  => 'required|max_length[800]',
+		'subject' => 'required|max_length[100]',
+		'message' => 'required|max_length[800]',
 	];
 
 	/**
@@ -91,7 +91,7 @@ class InformationModel extends \CodeIgniter\Model
 	 */
 	public function sort(string $sortKey = null, string $order = null)
 	{
-		if (in_array(mb_strtolower($sortKey), ['title', 'created_at', 'updated_at']))
+		if (in_array(mb_strtolower($sortKey), ['subject', 'created_at', 'updated_at']))
 		{
 			$order = mb_strtolower($order);
 			$order = (in_array($order, ['asc', 'desc'])) ? $order : 'asc';

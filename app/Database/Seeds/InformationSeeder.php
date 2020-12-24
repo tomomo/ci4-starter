@@ -30,8 +30,8 @@ class InformationSeeder extends \CodeIgniter\Database\Seeder
 		for ($i = 0; $i < $qty; $i += 1)
 		{
 			$model->insert([
-				'title' => $faker->realText($faker->numberBetween(10, 20)),
-				'text'  => $faker->realText($faker->numberBetween(300, 400)),
+				'subject' => $faker->realText($faker->numberBetween(10, 20)),
+				'message' => $faker->realText($faker->numberBetween(300, 400)),
 			]);
 		}
 	}

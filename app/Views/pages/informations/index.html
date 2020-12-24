@@ -30,7 +30,7 @@
             <th>
             </th>
             <th>
-              <?= sort_anchor('/informations', $params, 'title', lang('App.information.title')) ?>
+              <?= sort_anchor('/informations', $params, 'subject', lang('App.information.subject')) ?>
             </th>
             <th>
               <?= sort_anchor('/informations', $params, 'created_at', lang('App.information.created_at')) ?>
@@ -49,7 +49,7 @@
               </a>
             </td>
             <td>
-              <?= $item->title ?>
+              <?= $item->subject ?>
             </td>
             <td>
               <?= $item->created_at ?>

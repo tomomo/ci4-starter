@@ -37,12 +37,12 @@ class Migration_create_informations_table extends \CodeIgniter\Database\Migratio
 				'null'           => false,
 				'auto_increment' => true,
 			],
-			'title'      => [
+			'subject'    => [
 				'type'       => 'VARCHAR',
 				'constraint' => 100,
 				'null'       => false,
 			],
-			'text'       => [
+			'message'    => [
 				'type'       => 'VARCHAR',
 				'constraint' => 800,
 				'null'       => false,
