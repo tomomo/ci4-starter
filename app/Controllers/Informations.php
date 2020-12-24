@@ -24,6 +24,8 @@ class Informations extends BaseController
 	public function index()
 	{
 		echo __METHOD__;
+		$information = model('InformationModel')->findAll();
+		var_dump($information);
 		return view('example.html');
 	}
 
