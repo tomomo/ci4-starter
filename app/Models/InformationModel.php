@@ -82,12 +82,35 @@ class InformationModel extends \CodeIgniter\Model
 	}
 
 	/**
+	 * 汎用的検索クエリ
+	 *
+	 * @param mixed  $params     検索
+	 * @param string $aliasTable エイリアス名
+	 *
+	 * @return object InformationModel
+	 */
+	public function search($params = null, string $aliasTable = null)
+	{
+		if (isset($params['text']))
+		{
+			$str   = $params['text'];
+			$table = $aliasTable ?? $this->table;
+			$this
+				->groupStart()
+				->orLike($table . '.subject', $str)
+				->orLike($table . '.message', $str)
+				->groupEnd();
+		}
+		return $this;
+	}
+
+	/**
 	 * ソート
 	 *
 	 * @param string $sortKey ソートキー
 	 * @param string $order   昇順降順
 	 *
-	 * @return object
+	 * @return object InformationModel
 	 */
 	public function sort(string $sortKey = null, string $order = null)
 	{
@@ -99,5 +122,4 @@ class InformationModel extends \CodeIgniter\Model
 		}
 		return $this;
 	}
-
 }

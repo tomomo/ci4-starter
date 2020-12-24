@@ -31,6 +31,7 @@ class Informations extends BaseController
 		setCookie('informations', http_build_query($params));
 
 		$information = model('InformationModel')
+			->search($params)
 			->sort($sort, $order)
 			->page();
 
