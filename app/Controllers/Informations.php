@@ -26,13 +26,11 @@ class Informations extends BaseController
 		helper(['form', 'cookie']);
 
 		$params = $this->request->getGet();
-		$sort   = $this->request->getGet('s');
-		$order  = $this->request->getGet('o');
 		setCookie('informations', http_build_query($params));
 
 		$information = model('InformationModel')
 			->search($params)
-			->sort($sort, $order)
+			->sort($params)
 			->page();
 
 		$data = compact('information', 'params');

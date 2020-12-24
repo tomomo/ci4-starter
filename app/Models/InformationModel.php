@@ -107,18 +107,23 @@ class InformationModel extends \CodeIgniter\Model
 	/**
 	 * ソート
 	 *
-	 * @param string $sortKey ソートキー
-	 * @param string $order   昇順降順
+	 * @param array $params ソート条件 $params s:対象項目
+	 *                                         o:昇順/降順
 	 *
 	 * @return object InformationModel
 	 */
-	public function sort(string $sortKey = null, string $order = null)
+	public function sort(array $params = null)
 	{
-		if (in_array(mb_strtolower($sortKey), ['subject', 'created_at', 'updated_at']))
+		if (! isset($params['s']))
 		{
-			$order = mb_strtolower($order);
+			return $this;
+		}
+		$sort = $params['s'];
+		if (in_array(mb_strtolower($sort), ['subject', 'created_at', 'updated_at']))
+		{
+			$order = mb_strtolower($params['o'] ?? null);
 			$order = (in_array($order, ['asc', 'desc'])) ? $order : 'asc';
-			$this->orderBy($this->table . '.' . $sortKey, $order);
+			$this->orderBy($sort, $order);
 		}
 		return $this;
 	}
