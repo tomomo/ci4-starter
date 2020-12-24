@@ -5,50 +5,68 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>@TODO</title>
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/css/bootstrap.min.css"
+    integrity="sha512-thoh2veB35ojlAhyYZC0eaztTAUhxLvSZlWrNtlV01njqs/UdY3421Jg7lX0Gq9SRdGVQeL8xeBp9x1IPyL1wQ=="
+    crossorigin="anonymous" />
 </head>
 
-<body>
-  <main>
-    <div>
-      <?= $information->total ?>
-    </div>
-    <div>
-      <?= $information->pager->links() ?>
-    </div>
-    <table>
-      <thead>
-        <tr>
-          <th></th>
-          <th>
-            <?= lang('App.informations.title') ?>
-          </th>
-          <th>
-            <?= lang('App.informations.created_at') ?>
-          </th>
-          <th>
-            <?= lang('App.informations.updated_at') ?>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <? foreach($information->items as $item) : ?>
-        <tr>
-          <td>
-          </td>
-          <td>
-            <?= $item->title ?>
-          </td>
-          <td>
-            <?= $item->created_at ?>
-          </td>
-          <td>
-            <?= $item->updated_at ?>
-          </td>
-        </tr>
-        <? endforeach; ?>
-      </tbody>
-    </table>
-  </main>
+<body class="bg-light">
+  <div class="container-fluid">
+    <main>
+      <div class="d-flex flex-column flex-sm-row justify-content-sm-between">
+        <div class="my-2">
+          <p>
+            <?= $information->total ?>
+          </p>
+        </div>
+        <div class="my-2">
+          <?= $information->pager->links() ?>
+        </div>
+      </div>
+      <table class="table table-bordered table-light">
+        <thead class="table-light">
+          <tr>
+            <th>
+            </th>
+            <th>
+              <?= lang('App.informations.title') ?>
+            </th>
+            <th>
+              <?= lang('App.informations.created_at') ?>
+            </th>
+            <th>
+              <?= lang('App.informations.updated_at') ?>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <? foreach($information->items as $item) : ?>
+          <tr>
+            <td>
+              <a class="btn btn-link" href="<?= base_url('informations/' . $item->id) ?>">
+                <?= lang('App.show') ?>
+              </a>
+            </td>
+            <td>
+              <?= $item->title ?>
+            </td>
+            <td>
+              <?= $item->created_at ?>
+            </td>
+            <td>
+              <?= $item->updated_at ?>
+            </td>
+          </tr>
+          <? endforeach; ?>
+        </tbody>
+      </table>
+    </main>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/js/bootstrap.bundle.min.js"
+    integrity="sha512-q2vREMvON/xrz1KuOj5QKWmdvcHtM4XNbNer+Qbf4TOj+RMDnul0Fg3VmmYprdf3fnL1gZgzKhZszsp62r5Ugg=="
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
