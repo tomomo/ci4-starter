@@ -22,7 +22,8 @@
 		"post-update-cmd": [
 			"@composer dump-autoload"
 		],
-		"test": "phpunit"
+		"test": "phpunit",
+		"spark": "docker exec -it ci4starter_web php spark"
 	},
 	"support": {
 		"forum": "http://forum.codeigniter.com/",

@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+  web:
+    container_name: ci4starter_web
+    build: ./infra/docker/webapp-php74
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - .:/var/www/html
+  db:
+    container_name: ci4starter_db
+    image: circleci/mysql:5.5
+    restart: always
+    volumes:
+      - data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=ci4starter_dev
+      - MYSQL_USER=appuser
+      - MYSQL_PASSWORD=devpass
+  phpmyadmin:
+    container_name: ci4starter_phpmyadmin
+    build: ./infra/docker/phpmyadmin
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "8306:80"
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=db
+      - PMA_USER=root
+      - PMA_PASSWORD=root
+volumes:
+  data:
+    external:
+      name: ci4starter
