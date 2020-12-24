@@ -30,13 +30,13 @@
             <th>
             </th>
             <th>
-              <?= lang('App.informations.title') ?>
+              <?= sort_anchor('/informations', $params, 'title', lang('App.information.title')) ?>
             </th>
             <th>
-              <?= lang('App.informations.created_at') ?>
+              <?= sort_anchor('/informations', $params, 'created_at', lang('App.information.created_at')) ?>
             </th>
             <th>
-              <?= lang('App.informations.updated_at') ?>
+              <?= sort_anchor('/informations', $params, 'updated_at', lang('App.information.updated_at')) ?>
             </th>
           </tr>
         </thead>

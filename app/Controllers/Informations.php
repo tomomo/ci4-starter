@@ -23,9 +23,18 @@ class Informations extends BaseController
 	 */
 	public function index()
 	{
-		$information = model('InformationModel')->page();
+		helper(['form', 'cookie']);
 
-		$data = compact('information');
+		$params = $this->request->getGet();
+		$sort   = $this->request->getGet('s');
+		$order  = $this->request->getGet('o');
+		setCookie('informations', http_build_query($params));
+
+		$information = model('InformationModel')
+			->sort($sort, $order)
+			->page();
+
+		$data = compact('information', 'params');
 		return view('pages/informations/index.html', $data);
 	}
 

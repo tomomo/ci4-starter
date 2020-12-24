@@ -81,4 +81,23 @@ class InformationModel extends \CodeIgniter\Model
 		return $data;
 	}
 
+	/**
+	 * ソート
+	 *
+	 * @param string $sortKey ソートキー
+	 * @param string $order   昇順降順
+	 *
+	 * @return object
+	 */
+	public function sort(string $sortKey = null, string $order = null)
+	{
+		if (in_array(mb_strtolower($sortKey), ['title', 'created_at', 'updated_at']))
+		{
+			$order = mb_strtolower($order);
+			$order = (in_array($order, ['asc', 'desc'])) ? $order : 'asc';
+			$this->orderBy($this->table . '.' . $sortKey, $order);
+		}
+		return $this;
+	}
+
 }
