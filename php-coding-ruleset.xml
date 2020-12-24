@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rulset name="My Project">
+  <config name="installed_paths" value="vendor/codeigniter4/codeigniter4-standard/CodeIgniter4"/>
+  <description></description>
+  <rule ref="vendor/codeigniter4/codeigniter4-standard/CodeIgniter4/ruleset.xml"/>
+  <exclude-pattern>*/vendor/*</exclude-pattern>
+  <exclude-pattern>*/vendors/*</exclude-pattern>
+  <exclude-pattern>writable/**/*</exclude-pattern>
+  <!-- @REVIEW 従うべきだがデフォルトで設定されている数が多い -->
+  <exclude-pattern>app/Config/*</exclude-pattern>
+  <exclude-pattern>app/Language/*</exclude-pattern>
+</rulset>
