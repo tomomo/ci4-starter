@@ -1,5 +1,17 @@
 <?php
+/**
+ * Controllers
+ *
+ * @package CodeIgniter
+ * @author  tomomo <eclairpark@gmail.com>
+ * @license http://www.opensource.org/licenses/mit-license.html  MIT License
+ */
+
 namespace App\Controllers;
+
+use CodeIgniter\HTTP\RequestInterface;
+use CodeIgniter\HTTP\ResponseInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  * Class BaseController
@@ -13,12 +25,8 @@ namespace App\Controllers;
  *
  * @package CodeIgniter
  */
-
-use CodeIgniter\Controller;
-
-class BaseController extends Controller
+class BaseController extends \CodeIgniter\Controller
 {
-
 	/**
 	 * An array of helpers to be loaded automatically upon
 	 * class instantiation. These helpers will be available
@@ -30,8 +38,14 @@ class BaseController extends Controller
 
 	/**
 	 * Constructor.
+	 *
+	 * @param CodeIgniter\HTTP\RequestInterface  $request  Request
+	 * @param CodeIgniter\HTTP\ResponseInterface $response Response
+	 * @param Psr\Log\LoggerInterface            $logger   Logger
+	 *
+	 * @return void
 	 */
-	public function initController(\CodeIgniter\HTTP\RequestInterface $request, \CodeIgniter\HTTP\ResponseInterface $response, \Psr\Log\LoggerInterface $logger)
+	public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
 	{
 		// Do Not Edit This Line
 		parent::initController($request, $response, $logger);
@@ -39,8 +53,7 @@ class BaseController extends Controller
 		//--------------------------------------------------------------------
 		// Preload any models, libraries, etc, here.
 		//--------------------------------------------------------------------
-		// E.g.:
-		// $this->session = \Config\Services::session();
+		$this->session = \Config\Services::session();
 	}
 
 }
