@@ -64,4 +64,21 @@ class InformationModel extends \CodeIgniter\Model
 		'title' => 'required|max_length[100]',
 		'text'  => 'required|max_length[800]',
 	];
+
+	/**
+	 * ページ単位出力
+	 *
+	 * @return object
+	 */
+	public function page()
+	{
+		$total = $this->countAllResults(false);
+		$data  = (object) [
+							  'total' => $total,
+							  'items' => $this->paginate(),
+							  'pager' => $this->pager,
+						  ];
+		return $data;
+	}
+
 }

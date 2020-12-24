@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>@TODO</title>
+</head>
+
+<body>
+  <main>
+    <div>
+      <?= $information->total ?>
+    </div>
+    <div>
+      <?= $information->pager->links() ?>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>
+            <?= lang('App.informations.title') ?>
+          </th>
+          <th>
+            <?= lang('App.informations.created_at') ?>
+          </th>
+          <th>
+            <?= lang('App.informations.updated_at') ?>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <? foreach($information->items as $item) : ?>
+        <tr>
+          <td>
+          </td>
+          <td>
+            <?= $item->title ?>
+          </td>
+          <td>
+            <?= $item->created_at ?>
+          </td>
+          <td>
+            <?= $item->updated_at ?>
+          </td>
+        </tr>
+        <? endforeach; ?>
+      </tbody>
+    </table>
+  </main>
+</body>
+
+</html>

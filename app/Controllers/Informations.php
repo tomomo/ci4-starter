@@ -23,10 +23,10 @@ class Informations extends BaseController
 	 */
 	public function index()
 	{
-		echo __METHOD__;
-		$information = model('InformationModel')->findAll();
-		var_dump($information);
-		return view('example.html');
+		$information = model('InformationModel')->page();
+
+		$data = compact('information');
+		return view('pages/informations/index.html', $data);
 	}
 
 	/**
