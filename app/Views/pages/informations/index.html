@@ -20,6 +20,8 @@
       </span>
     </h1>
 
+    <?= $this->include('layouts/alert/success.html') ?>
+    <?= $this->include('layouts/alert/error.html') ?>
     <div class="card my-1">
       <?= form_open('', ['method' => 'get']) ?>
       <div class="card-body">
@@ -45,7 +47,7 @@
       <?= form_close() ?>
     </div>
     <div class="my-2">
-      <a class="" href="/informations/new">
+      <a class="btn btn-link" href="/informations/new">
         <?= lang('App.new') ?>
       </a>
     </div>

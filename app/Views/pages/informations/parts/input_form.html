@@ -1,0 +1,26 @@
+<div class="col-12">
+  <label for="inputSubject" class="form-label">
+    <?= lang('App.information.subject') ?>
+  </label>
+  <?= form_input([
+      'class' => 'form-control' . (isset(session('error')->data->subject) ? ' is-invalid' : ''),
+      'name' => 'subject',
+      'value' => old('subject', $information->subject ?? '')
+    ]) ?>
+  <div class="invalid-feedback">
+    <?= session('error')->data->subject ?? '' ?>
+  </div>
+</div>
+<div class="col-12">
+  <label for="inputMessage" class="form-label">
+    <?= lang('App.information.message') ?>
+  </label>
+  <?= form_textarea([
+      'class' => 'form-control' . (isset(session('error')->data->message) ? ' is-invalid' : ''),
+      'name' => 'message',
+      'value' => old('message', $information->message ?? '')
+    ]) ?>
+  <div class="invalid-feedback">
+    <?= session('error')->data->message ?? '' ?>
+  </div>
+</div>

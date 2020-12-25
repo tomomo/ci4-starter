@@ -114,11 +114,29 @@ class Informations extends BaseController
 	/**
 	 * 作成処理
 	 *
-	 * @return void
+	 * @return obejct Redirect
 	 */
 	public function create()
 	{
-		echo __METHOD__;
+		$model = model('InformationModel');
+
+		$params = $this->request->getPost();
+
+		if (! $model->insert($params))
+		{
+			$error = (object) [
+								  'message' => lang('App.inputErrors'),
+								  'data'    => (object) $model->errors(),
+							  ];
+			return redirect()
+				->back()
+				->withInput()
+				->with('error', $error);
+		}
+		$id = $model->insertID();
+		return redirect()
+			->to('/informations/edit/' . $id)
+			->with('success', (object) ['message' => lang('App.informations.successfullyCreated')]);
 	}
 
 	/**
@@ -126,22 +144,64 @@ class Informations extends BaseController
 	 *
 	 * @param string $id ID
 	 *
-	 * @return void
+	 * @return obejct Redirect
 	 */
 	public function update(string $id = null)
 	{
-		echo __METHOD__;
+		// @REVIEW 生成されたrouteの其れに従ってidを使っているが、sessionに持たせるべきかと思う。
+		if (empty($id))
+		{
+			return $this->response->setStatusCode(500)->setBody('Internal Server Error');
+		}
+
+		$model  = model('InformationModel');
+		$params = compact('id') + $this->request->getPost();
+
+		if (! $model->update($id, $params))
+		{
+			$error = (object) [
+								  'message' => lang('App.inputErrors'),
+								  'data'    => (object) $model->errors(),
+							  ];
+			return redirect()
+				->back()
+				->withInput()
+				->with('error', $error);
+		}
+		return redirect()
+			->to('/informations/edit/' . $id)
+			->with('success', (object) ['message' => lang('App.informations.successfullyUpdated')]);
 	}
 
 	/**
-	 * 更新処理
+	 * 削除処理
 	 *
 	 * @param string $id ID
 	 *
-	 * @return void
+	 * @return obejct Redirect
 	 */
 	public function delete(string $id = null)
 	{
-		echo __METHOD__;
+		// @REVIEW 生成されたrouteのルールに従ってidを使ってはいるが、sessionに持たせるべきかと思う。
+		if (empty($id))
+		{
+			return $this->response->setStatusCode(500)->setBody('Internal Server Error');
+		}
+
+		$model = model('InformationModel');
+		if (! $model->delete($id))
+		{
+			$error = (object)[
+								 'message' => lang('App.inputErrors'),
+								 'data'    => (object) $model->errors(),
+							 ];
+			return redirect()
+				->back()
+				->withInput()
+				->with('error', $error);
+		}
+		return redirect()
+			->to('/informations')
+			->with('success', (object) ['message' => lang('App.informations.successfullyDeleted')]);
 	}
 }

@@ -20,27 +20,10 @@
       </span>
     </h1>
     <?= form_open('/informations/create') ?>
+    <?= $this->include('layouts/alert/success.html') ?>
+    <?= $this->include('layouts/alert/error.html') ?>
     <div class="row g-3">
-      <div class="col-12">
-        <label for="inputSubject" class="form-label">
-          <?= lang('App.information.subject') ?>
-        </label>
-        <?= form_input([
-            'class' => 'form-control',
-            'name' => 'subject',
-            'value' => old('subject', $information->subject ?? '')
-          ]) ?>
-      </div>
-      <div class="col-12">
-        <label for="inputMessage" class="form-label">
-          <?= lang('App.information.message') ?>
-        </label>
-        <?= form_textarea([
-            'class' => 'form-control',
-            'name' => 'message',
-            'value' => old('message', $information->message ?? '')
-          ]) ?>
-      </div>
+      <?= $this->include('pages/informations/parts/input_form.html') ?>
       <div class="col-12">
         <button class="btn btn-success">
           <?= lang('App.create') ?>
