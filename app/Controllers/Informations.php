@@ -30,10 +30,7 @@ class Informations extends BaseController
 		$params = $this->request->getGet();
 		setCookie('informations', http_build_query($params));
 
-		$information = model('InformationModel')
-			->search($params)
-			->sort($params)
-			->page();
+		$information = service('informationService')->searchPage($params);
 
 		$data = compact('information', 'params');
 		return view('pages/informations/index.html', $data);
@@ -50,7 +47,7 @@ class Informations extends BaseController
 	{
 		helper(['form', 'cookie']);
 
-		if (! $information = model('InformationModel')->find($id))
+		if (! $information = service('informationService')->find($id))
 		{
 			throw PageNotFoundException::forPageNotFound();
 		}
@@ -82,7 +79,7 @@ class Informations extends BaseController
 	{
 		helper(['form', 'cookie']);
 
-		if (! $information = model('InformationModel')->find($id))
+		if (! $information = service('informationService')->find($id))
 		{
 			throw PageNotFoundException::forPageNotFound();
 		}
@@ -102,7 +99,7 @@ class Informations extends BaseController
 	{
 		helper(['form', 'cookie']);
 
-		if (! $information = model('InformationModel')->find($id))
+		if (! $information = service('informationService')->find($id))
 		{
 			throw PageNotFoundException::forPageNotFound();
 		}
@@ -118,25 +115,18 @@ class Informations extends BaseController
 	 */
 	public function create()
 	{
-		$model = model('InformationModel');
-
-		$params = $this->request->getPost();
-
-		if (! $model->insert($params))
+		$params  = $this->request->getPost();
+		$created = service('informationService')->create($params);
+		if ($created->status)
 		{
-			$error = (object) [
-								  'message' => lang('App.inputErrors'),
-								  'data'    => (object) $model->errors(),
-							  ];
 			return redirect()
-				->back()
-				->withInput()
-				->with('error', $error);
+			->to('/informations/edit/' . $created->data->id)
+			->with('success', $created);
 		}
-		$id = $model->insertID();
 		return redirect()
-			->to('/informations/edit/' . $id)
-			->with('success', (object) ['message' => lang('App.informations.successfullyCreated')]);
+			->back()
+			->withInput()
+			->with('error', $created);
 	}
 
 	/**
@@ -148,29 +138,18 @@ class Informations extends BaseController
 	 */
 	public function update(string $id = null)
 	{
-		// @REVIEW 生成されたrouteの其れに従ってidを使っているが、sessionに持たせるべきかと思う。
-		if (empty($id))
+		$params  = $this->request->getPost();
+		$updated = service('informationService')->update($id, $params);
+		if ($updated->status)
 		{
-			return $this->response->setStatusCode(500)->setBody('Internal Server Error');
-		}
-
-		$model  = model('InformationModel');
-		$params = compact('id') + $this->request->getPost();
-
-		if (! $model->update($id, $params))
-		{
-			$error = (object) [
-								  'message' => lang('App.inputErrors'),
-								  'data'    => (object) $model->errors(),
-							  ];
 			return redirect()
-				->back()
-				->withInput()
-				->with('error', $error);
+			->to('/informations/edit/' . $id)
+			->with('success', $updated);
 		}
 		return redirect()
-			->to('/informations/edit/' . $id)
-			->with('success', (object) ['message' => lang('App.informations.successfullyUpdated')]);
+			->back()
+			->withInput()
+			->with('error', $updated);
 	}
 
 	/**
@@ -182,26 +161,18 @@ class Informations extends BaseController
 	 */
 	public function delete(string $id = null)
 	{
+		$params = $this->request->getPost();
 		// @REVIEW 生成されたrouteのルールに従ってidを使ってはいるが、sessionに持たせるべきかと思う。
-		if (empty($id))
+		$deleted = service('informationService')->delete($id);
+		if ($deleted->status)
 		{
-			return $this->response->setStatusCode(500)->setBody('Internal Server Error');
-		}
-
-		$model = model('InformationModel');
-		if (! $model->delete($id))
-		{
-			$error = (object)[
-								 'message' => lang('App.inputErrors'),
-								 'data'    => (object) $model->errors(),
-							 ];
 			return redirect()
-				->back()
-				->withInput()
-				->with('error', $error);
+			->to('/informations')
+			->with('success', $deleted);
 		}
 		return redirect()
-			->to('/informations')
-			->with('success', (object) ['message' => lang('App.informations.successfullyDeleted')]);
+			->back()
+			->withInput()
+			->with('error', $deleted);
 	}
 }
