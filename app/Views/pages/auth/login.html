@@ -1,0 +1,27 @@
+<?= $this->extend('layouts/base.html') ?>
+
+<?= $this->section('contents') ?>
+<div class="container w-50">
+  <h1>Login</h1>
+  <?= form_open('/login') ?>
+  <?= $this->include('layouts/alert/success.html') ?>
+  <?= $this->include('layouts/alert/error.html') ?>
+  <?= form_input([
+    'class' => 'form-control',
+    'autofocus' => true,
+    'name' => 'account',
+    'value' => old('account', ''),
+  ]) ?>
+  <?= form_password([
+    'class' => 'form-control',
+    'autocomplate' => 'off',
+    'name' => 'password',
+  ]) ?>
+  <div class="my-2">
+    <button class="btn btn-primary btn-lg btn-block w-100">
+      <?= lang('App.login') ?>
+    </button>
+  </div>
+  <?= form_close() ?>
+</div>
+<?= $this->endSection() ?>

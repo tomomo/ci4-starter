@@ -134,4 +134,61 @@ class UserModel extends \CodeIgniter\Model
 		}
 		return $this;
 	}
+
+	/**
+	 * メールアドレスからデータ取得
+	 *
+	 * @param string $email メールアドレス
+	 *
+	 * @return object
+	 */
+	public function findByEmail(string $email)
+	{
+		return $this->where('email', $email)->first();
+	}
+
+	/**
+	 * データ事前変換処理
+	 *
+	 * @param array|object $data カラムデータ
+	 *
+	 * @return void
+	 */
+	private function convertDataBefore(&$data)
+	{
+		$data = (array) $data;
+		if (isset($data['password']))
+		{
+			$data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+		}
+	}
+
+	/**
+	 * 登録処理
+	 *
+	 * @param array|object $data     Data
+	 * @param boolean      $returnID Whether insert ID should be returned or not.
+	 *
+	 * @return integer|string|boolean
+	 */
+	public function insert($data = null, bool $returnID = true): bool
+	{
+		$this->convertDataBefore($data);
+		return parent::insert($data, $returnID);
+	}
+
+	/**
+	 * 更新処理
+	 *
+	 * @param integer|array|string $id   ID
+	 * @param array|object         $data Data
+	 *
+	 * @return boolean
+	 */
+	public function update($id = null, $data = null): bool
+	{
+		$this->convertDataBefore($data);
+		return parent::update($id, $data);
+	}
+
 }
