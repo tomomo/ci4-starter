@@ -38,6 +38,8 @@ $routes->resource('api/informations', [
 	'except' => 'new,edit'
 ]);
 
+$routes->presenter('users', ['controller' => 'Users']);
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing

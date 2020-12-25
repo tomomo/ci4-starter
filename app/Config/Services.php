@@ -25,4 +25,13 @@ class Services extends CoreServices
 		}
 		return new \App\Libraries\InformationService();
 	}
+
+	public static function userService($getShared = true)
+	{
+		if ($getShared)
+		{
+			return static::getSharedInstance('userService');
+		}
+		return new \App\Libraries\UserService();
+	}
 }

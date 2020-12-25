@@ -1,0 +1,26 @@
+<div class="row g-3">
+  <div class="col-12">
+    <label for="inputEmail" class="form-label">
+      <?= lang('App.user.email') ?>
+    </label>
+    <div class="p-2">
+      <?= esc($user->email ?? '') ?>
+    </div>
+  </div>
+  <div class="col-12">
+    <label for="inputName" class="form-label">
+      <?= lang('App.user.name') ?>
+    </label>
+    <div class="p-2">
+      <?= esc($user->name ?? '') ?>
+    </div>
+  </div>
+  <div class="col-12">
+    <label for="inputNameKana" class="form-label">
+      <?= lang('App.user.nameKana') ?>
+    </label>
+    <div class="p-2">
+      <?= esc($user->name_kana ?? '') ?>
+    </div>
+  </div>
+</div>

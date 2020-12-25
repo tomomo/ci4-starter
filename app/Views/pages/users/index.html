@@ -1,0 +1,96 @@
+<?= $this->extend('layouts/base.html') ?>
+
+<?= $this->section('contents') ?>
+<div class="container-fluid">
+  <h1>
+    <?= lang('App.func.user') ?>
+    <span class="lead">
+      <?= lang('App.index') ?>
+    </span>
+  </h1>
+  <?= $this->include('layouts/alert/success.html') ?>
+  <?= $this->include('layouts/alert/error.html') ?>
+  <div class="card my-1">
+    <?= form_open('', ['method' => 'get']) ?>
+    <div class="card-body">
+      <div class="my-2">
+        <?= form_input([
+          'class' => 'form-control',
+          'name' => 'text',
+          'placeholder' => lang('App.user.searchTextPlaceholder'),
+          'value' => $params['text'] ?? '',
+        ]) ?>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="my-1">
+        <button class="btn btn-primary">
+          <?= lang('App.search') ?>
+        </button>
+        <a class="btn btn-secondary" href="/users">
+          <?= lang('App.reset') ?>
+        </a>
+      </div>
+    </div>
+    <?= form_close() ?>
+  </div>
+  <div class="my-2">
+    <a class="btn btn-link" href="/users/new">
+      <?= lang('App.new') ?>
+    </a>
+  </div>
+  <div class="d-flex flex-column flex-sm-row justify-content-sm-between">
+    <div class="my-2">
+      <p>
+        <?= $user->total ?>
+      </p>
+    </div>
+    <div class="my-2">
+      <?= $user->pager->links() ?>
+    </div>
+  </div>
+  <table class="table table-bordered table-light">
+    <thead class="table-light">
+      <tr>
+        <th>
+        </th>
+        <th>
+          <?= sort_anchor('/users', $params, 'email', lang('App.user.email')) ?>
+        </th>
+        <th>
+          <?= sort_anchor('/users', $params, 'name', lang('App.user.name')) ?>
+        </th>
+        <th>
+          <?= sort_anchor('/users', $params, 'created_at', lang('App.user.created_at')) ?>
+        </th>
+        <th>
+          <?= sort_anchor('/users', $params, 'updated_at', lang('App.user.updated_at')) ?>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <? foreach($user->items as $item) : ?>
+      <tr>
+        <td>
+          <a class="btn btn-link" href="<?= base_url('users/' . $item->id) ?>">
+            <?= lang('App.show') ?>
+          </a>
+        </td>
+        <td>
+          <?= $item->email ?>
+        </td>
+        <td>
+          <?= $item->name ?>
+        </td>
+        <td>
+          <?= $item->created_at ?>
+        </td>
+        <td>
+          <?= $item->updated_at ?>
+        </td>
+      </tr>
+      <? endforeach; ?>
+    </tbody>
+  </table>
+</div>
+<?= $this->endSection() ?>
