@@ -1,0 +1,34 @@
+### Information:index
+GET http://localhost/api/informations
+Content-Type: application/json
+X-Requested-With: XMLHttpRequest
+
+### Information:show
+GET http://localhost/api/informations/1
+Content-Type: application/json
+X-Requested-With: XMLHttpRequest
+
+### Information:create
+POST http://localhost/api/informations
+Content-Type: application/json
+X-Requested-With: XMLHttpRequest
+
+{
+  "subject": "追加投稿",
+  "message": "apiTestによるテスト投稿です。"
+}
+
+### Information:update
+PATCH http://localhost/api/informations/1
+Content-Type: application/json
+X-Requested-With: XMLHttpRequest
+
+{
+  "subject": "更新投稿",
+  "message": "apiTestによるテスト投稿です。"
+}
+
+### Information:delete
+DELETE http://localhost/api/informations/1
+Content-Type: application/json
+X-Requested-With: XMLHttpRequest

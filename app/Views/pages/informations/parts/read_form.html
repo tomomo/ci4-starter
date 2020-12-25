@@ -1,0 +1,18 @@
+<div class="row g-3">
+  <div class="col-12">
+    <label for="inputSubject" class="form-label">
+      <?= lang('App.information.subject') ?>
+    </label>
+    <div class="p-2">
+      <?= esc($information->subject ?? '') ?>
+    </div>
+  </div>
+  <div class="col-12">
+    <label for="inputMessage" class="form-label">
+      <?= lang('App.information.message') ?>
+    </label>
+    <div class="p-2">
+      <?= nl2br(esc($information->message ?? '')) ?>
+    </div>
+  </div>
+</div>

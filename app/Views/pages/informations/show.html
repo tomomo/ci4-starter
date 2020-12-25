@@ -1,0 +1,28 @@
+<?= $this->extend('layouts/base.html') ?>
+
+<?= $this->section('contents') ?>
+<div class="container-fluid">
+  <h1>
+    <?= lang('App.func.information') ?>
+    <span class="lead">
+      <?= lang('App.show') ?>
+    </span>
+  </h1>
+  <div class="my-2">
+    <a class="btn btn-link" href="/informations/edit/<?= $information->id ?>">
+      <?= lang('App.edit') ?>
+    </a>
+    <a class="btn btn-link" href="/informations/remove/<?= $information->id ?>">
+      <?= lang('App.remove') ?>
+    </a>
+  </div>
+  <?= form_open('/informations/update/' . $information->id) ?>
+  <?= $this->include('layouts/alert/success.html') ?>
+  <?= $this->include('layouts/alert/error.html') ?>
+  <?= $this->include('pages/informations/parts/read_form.html') ?>
+  <?= form_close("\n") ?>
+  <div class="my-3">
+    <?= $this->include('pages/informations/parts/index_link.html') ?>
+  </div>
+</div>
+<?= $this->endSection() ?>

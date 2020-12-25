@@ -1,0 +1,25 @@
+<?= $this->extend('layouts/base.html') ?>
+
+<?= $this->section('contents') ?>
+<div class="container-fluid">
+  <h1>
+    <?= lang('App.func.information') ?>
+    <span class="lead">
+      <?= lang('App.new') ?>
+    </span>
+  </h1>
+  <?= form_open('/informations/create') ?>
+  <?= $this->include('layouts/alert/success.html') ?>
+  <?= $this->include('layouts/alert/error.html') ?>
+  <?= $this->include('pages/informations/parts/input_form.html') ?>
+  <div class="my-3">
+    <button class="btn btn-success">
+      <?= lang('App.create') ?>
+    </button>
+  </div>
+  <?= form_close("\n") ?>
+  <div class="my-3">
+    <?= $this->include('pages/informations/parts/index_link.html') ?>
+  </div>
+</div>
+<?= $this->endSection() ?>
