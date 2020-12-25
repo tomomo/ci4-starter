@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>@TODO</title>
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/css/bootstrap.min.css"
+    integrity="sha512-thoh2veB35ojlAhyYZC0eaztTAUhxLvSZlWrNtlV01njqs/UdY3421Jg7lX0Gq9SRdGVQeL8xeBp9x1IPyL1wQ=="
+    crossorigin="anonymous" />
+</head>
+
+<body class="bg-light">
+  <div class="container-fluid">
+    <h1>
+      <?= lang('App.func.information') ?>
+      <span class="lead">
+        <?= lang('App.show') ?>
+      </span>
+    </h1>
+    <div class="my-2">
+      <a class="btn btn-link" href="/informations/edit/<?= $information->id ?>">
+        <?= lang('App.edit') ?>
+      </a>
+      <a class="btn btn-link" href="/informations/remove/<?= $information->id ?>">
+        <?= lang('App.remove') ?>
+      </a>
+    </div>
+    <?= form_open('/informations/update/' . $information->id) ?>
+    <div class="row g-3">
+      <div class="col-12">
+        <label for="inputSubject" class="form-label">
+          <?= lang('App.information.subject') ?>
+        </label>
+        <div class="p-2">
+          <?= esc($information->subject ?? '') ?>
+        </div>
+      </div>
+      <div class="col-12">
+        <label for="inputMessage" class="form-label">
+          <?= lang('App.information.message') ?>
+        </label>
+        <div class="p-2">
+          <?= nl2br(esc($information->message ?? '')) ?>
+        </div>
+      </div>
+    </div>
+    <?= form_close("\n") ?>
+    <div class="my-3">
+      <a class="btn btn-link"
+        href="/informations<?= ((get_cookie('informations')) ? '?' : '') . get_cookie('informations') ?>">
+        <?= lang('App.backToIndex') ?>
+      </a>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/js/bootstrap.bundle.min.js"
+    integrity="sha512-q2vREMvON/xrz1KuOj5QKWmdvcHtM4XNbNer+Qbf4TOj+RMDnul0Fg3VmmYprdf3fnL1gZgzKhZszsp62r5Ugg=="
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

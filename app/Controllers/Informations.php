@@ -9,6 +9,8 @@
 
 namespace App\Controllers;
 
+use CodeIgniter\Exceptions\PageNotFoundException;
+
 /**
  * Class Informations
  *
@@ -46,8 +48,15 @@ class Informations extends BaseController
 	 */
 	public function show(string $id = null)
 	{
-		echo __METHOD__;
-		return view('example.html');
+		helper(['form', 'cookie']);
+
+		if (! $information = model('InformationModel')->find($id))
+		{
+			throw PageNotFoundException::forPageNotFound();
+		}
+
+		$data = compact('information');
+		return view('pages/informations/show.html', $data);
 	}
 
 	/**
@@ -57,8 +66,9 @@ class Informations extends BaseController
 	 */
 	public function new()
 	{
-		echo __METHOD__;
-		return view('example.html');
+		helper(['form', 'cookie']);
+
+		return view('pages/informations/new.html');
 	}
 
 	/**
@@ -70,8 +80,15 @@ class Informations extends BaseController
 	 */
 	public function edit(string $id = null)
 	{
-		echo __METHOD__;
-		return view('example.html');
+		helper(['form', 'cookie']);
+
+		if (! $information = model('InformationModel')->find($id))
+		{
+			throw PageNotFoundException::forPageNotFound();
+		}
+
+		$data = compact('information');
+		return view('pages/informations/edit.html', $data);
 	}
 
 	/**
@@ -83,8 +100,15 @@ class Informations extends BaseController
 	 */
 	public function remove(string $id = null)
 	{
-		echo __METHOD__;
-		return view('example.html');
+		helper(['form', 'cookie']);
+
+		if (! $information = model('InformationModel')->find($id))
+		{
+			throw PageNotFoundException::forPageNotFound();
+		}
+
+		$data = compact('information');
+		return view('pages/informations/remove.html', $data);
 	}
 
 	/**
