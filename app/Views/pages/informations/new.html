@@ -1,44 +1,25 @@
-<!DOCTYPE html>
-<html lang="ja">
+<?= $this->extend('layouts/base.html') ?>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>@TODO</title>
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/css/bootstrap.min.css"
-    integrity="sha512-thoh2veB35ojlAhyYZC0eaztTAUhxLvSZlWrNtlV01njqs/UdY3421Jg7lX0Gq9SRdGVQeL8xeBp9x1IPyL1wQ=="
-    crossorigin="anonymous" />
-</head>
-
-<body class="bg-light">
-  <div class="container-fluid">
-    <h1>
-      <?= lang('App.func.information') ?>
-      <span class="lead">
-        <?= lang('App.new') ?>
-      </span>
-    </h1>
-    <?= form_open('/informations/create') ?>
-    <?= $this->include('layouts/alert/success.html') ?>
-    <?= $this->include('layouts/alert/error.html') ?>
-    <div class="row g-3">
-      <?= $this->include('pages/informations/parts/input_form.html') ?>
-      <div class="col-12">
-        <button class="btn btn-success">
-          <?= lang('App.create') ?>
-        </button>
-      </div>
-    </div>
-    <?= form_close("\n") ?>
-    <div class="my-3">
-      <?= $this->include('pages/informations/parts/index_link.html') ?>
-    </div>
+<?= $this->section('contents') ?>
+<div class="container-fluid">
+  <h1>
+    <?= lang('App.func.information') ?>
+    <span class="lead">
+      <?= lang('App.new') ?>
+    </span>
+  </h1>
+  <?= form_open('/informations/create') ?>
+  <?= $this->include('layouts/alert/success.html') ?>
+  <?= $this->include('layouts/alert/error.html') ?>
+  <?= $this->include('pages/informations/parts/input_form.html') ?>
+  <div class="my-3">
+    <button class="btn btn-success">
+      <?= lang('App.create') ?>
+    </button>
   </div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/js/bootstrap.bundle.min.js"
-    integrity="sha512-q2vREMvON/xrz1KuOj5QKWmdvcHtM4XNbNer+Qbf4TOj+RMDnul0Fg3VmmYprdf3fnL1gZgzKhZszsp62r5Ugg=="
-    crossorigin="anonymous"></script>
-</body>
-
-</html>
+  <?= form_close("\n") ?>
+  <div class="my-3">
+    <?= $this->include('pages/informations/parts/index_link.html') ?>
+  </div>
+</div>
+<?= $this->endSection() ?>
