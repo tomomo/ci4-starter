@@ -53,11 +53,11 @@ class InformationService
 	/**
 	 * 作成処理
 	 *
-	 * @param array $data データ
+	 * @param array|object $data 作成データ
 	 *
 	 * @return obejct
 	 */
-	public function create(array $data)
+	public function create($data)
 	{
 		$model = model('InformationModel');
 
@@ -84,15 +84,15 @@ class InformationService
 	/**
 	 * 更新処理
 	 *
-	 * @param string $id   ID
-	 * @param array  $data Data
+	 * @param string       $id   更新対象ID
+	 * @param array|object $data 更新データ
 	 *
-	 * @return obejct Redirect
+	 * @return obejct
 	 */
-	public function update(string $id, array $data = [])
+	public function update(string $id, $data)
 	{
 		$model = model('InformationModel');
-		$data  = compact('id') + $data;
+		$data  = compact('id') + (array) $data;
 
 		if (! $model->update($id, $data))
 		{
@@ -115,7 +115,7 @@ class InformationService
 	 *
 	 * @param string $id ID
 	 *
-	 * @return obejct Redirect
+	 * @return obejct
 	 */
 	public function delete(string $id)
 	{

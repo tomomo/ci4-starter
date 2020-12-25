@@ -33,6 +33,10 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 
 $routes->presenter('informations', ['controller' => 'Informations']);
+$routes->resource('api/informations', [
+	'controller' => 'Api\Informations',
+	'except' => 'new,edit'
+]);
 
 /**
  * --------------------------------------------------------------------
