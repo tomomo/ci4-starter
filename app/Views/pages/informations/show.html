@@ -50,10 +50,7 @@
     </div>
     <?= form_close("\n") ?>
     <div class="my-3">
-      <a class="btn btn-link"
-        href="/informations<?= ((get_cookie('informations')) ? '?' : '') . get_cookie('informations') ?>">
-        <?= lang('App.backToIndex') ?>
-      </a>
+      <?= $this->include('pages/informations/parts/index_link.html') ?>
     </div>
   </div>
 
