@@ -67,7 +67,7 @@ class UserModel extends \CodeIgniter\Model
 	protected $validationRules = [
 		'email'     => 'required|valid_email|is_unique[users.email,id,{id}]',
 		'name'      => 'required|max_length[50]',
-		'name_kana' => 'required|max_length[100]',
+		'name_kana' => 'required|max_length[100]|hiragana',
 		'password'  => 'required',
 	];
 
