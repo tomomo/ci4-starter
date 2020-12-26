@@ -191,4 +191,18 @@ class UserModel extends \CodeIgniter\Model
 		return parent::update($id, $data);
 	}
 
+	/**
+	 * 指定したIDを除外
+	 *
+	 * @param string|array $id         ID
+	 * @param string       $aliasTable エイリアス名
+	 *
+	 * @return object UserModel
+	 */
+	public function exclude($id = null, string $aliasTable = null)
+	{
+		$this->whereNotIn('id', (array) $id);
+		return $this;
+	}
+
 }

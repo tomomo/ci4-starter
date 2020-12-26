@@ -19,15 +19,18 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 class UserService
 {
 	/**
-	 * データ取得
+	 * 一覧データ取得
 	 *
-	 * @param array $params パラメーター
+	 * @param array $params 検索条件、ソート条件
 	 *
 	 * @return object
 	 */
 	public function searchPage(array $params)
 	{
+		$excludeUserId = service('authentication')->me('id');
+
 		$user = model('UserModel')
+			->exclude($excludeUserId)
 			->search($params)
 			->sort($params)
 			->page();
@@ -35,7 +38,7 @@ class UserService
 	}
 
 	/**
-	 * データ取得
+	 * 単体データ取得
 	 *
 	 * @param string $id ID
 	 *
@@ -47,7 +50,9 @@ class UserService
 		{
 			return null;
 		}
-		return model('UserModel')->find($id);
+
+		$excludeUserId = service('authentication')->me('id');
+		return model('UserModel')->exclude($excludeUserId)->find($id);
 	}
 
 	/**

@@ -60,13 +60,20 @@ class Authentication
 	}
 
 	/**
-	 * ログイン情報
+	 * ログイン情報取得
 	 *
-	 * @return object
+	 * @param string $key キー名
+	 *
+	 * @return object ログイン情報
 	 */
-	public function me()
+	public function me(string $key = null)
 	{
-		return session()->get($this->loginSessionName);
+		$data = session($this->loginSessionName);
+		if ($key)
+		{
+			return $data->{$key} ?? null;
+		}
+		return $data;
 	}
 
 	/**
