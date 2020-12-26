@@ -1,58 +1,42 @@
-<div class="row g-3">
-  <div class="col-12">
-    <label for="inputEmail" class="form-label">
-      <?= lang('App.user.email') ?>
-    </label>
-    <?= form_input([
-        'class' => 'form-control' . (isset(session('error')->data->email) ? ' is-invalid' : ''),
-        'id' => 'inputEmail',
-        'name' => 'email',
-        'value' => old('email', $user->email ?? '')
-      ]) ?>
-    <div class="invalid-feedback">
-      <?= session('error')->data->email ?? '' ?>
-    </div>
+<div class="col-12">
+  <label for="inputEmail" class="form-label">
+    <?= lang('App.user.email') ?>
+  </label>
+  <?= form_input([
+      'class' => 'form-control' . (isset(session('error')->data->email) ? ' is-invalid' : ''),
+      'id' => 'inputEmail',
+      'name' => 'email',
+      'value' => old('email', $user->email ?? '')
+    ]) ?>
+  <div class="invalid-feedback">
+    <?= session('error')->data->email ?? '' ?>
   </div>
-  <div class="col-12 col-md-6">
-    <label for="inputName" class="form-label">
-      <?= lang('App.user.name') ?>
-    </label>
-    <?= form_input([
-        'class' => 'form-control' . (isset(session('error')->data->name) ? ' is-invalid' : ''),
-        'id' => 'inputName',
-        'name' => 'name',
-        'value' => old('name', $user->name ?? '')
-      ]) ?>
-    <div class="invalid-feedback">
-      <?= session('error')->data->name ?? '' ?>
-    </div>
+</div>
+<div class="col-12 col-md-6">
+  <label for="inputName" class="form-label">
+    <?= lang('App.user.name') ?>
+  </label>
+  <?= form_input([
+      'class' => 'form-control' . (isset(session('error')->data->name) ? ' is-invalid' : ''),
+      'id' => 'inputName',
+      'name' => 'name',
+      'value' => old('name', $user->name ?? '')
+    ]) ?>
+  <div class="invalid-feedback">
+    <?= session('error')->data->name ?? '' ?>
   </div>
-  <div class="col-12 col-md-6">
-    <label for="inputNameKana" class="form-label">
-      <?= lang('App.user.nameKana') ?>
-    </label>
-    <?= form_input([
-        'class' => 'form-control' . (isset(session('error')->data->name_kana) ? ' is-invalid' : ''),
-        'id' => 'inputNameKana',
-        'name' => 'name_kana',
-        'value' => old('name_kana', $user->name_kana ?? '')
-      ]) ?>
-    <div class="invalid-feedback">
-      <?= session('error')->data->name_kana ?? '' ?>
-    </div>
-  </div>
-  <div class="col-12 col-md-6">
-    <label for="inputPassword" class="form-label">
-      <?= lang('App.user.password') ?>
-    </label>
-    <?= form_input([
-        'class' => 'form-control' . (isset(session('error')->data->password) ? ' is-invalid' : ''),
-        'id' => 'inputPassword',
-        'name' => 'password',
-        'value' => old('password', $user->password ?? '')
-      ]) ?>
-    <div class="invalid-feedback">
-      <?= session('error')->data->password ?? '' ?>
-    </div>
+</div>
+<div class="col-12 col-md-6">
+  <label for="inputNameKana" class="form-label">
+    <?= lang('App.user.nameKana') ?>
+  </label>
+  <?= form_input([
+      'class' => 'form-control' . (isset(session('error')->data->name_kana) ? ' is-invalid' : ''),
+      'id' => 'inputNameKana',
+      'name' => 'name_kana',
+      'value' => old('name_kana', $user->name_kana ?? '')
+    ]) ?>
+  <div class="invalid-feedback">
+    <?= session('error')->data->name_kana ?? '' ?>
   </div>
 </div>
