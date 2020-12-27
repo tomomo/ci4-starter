@@ -21,6 +21,8 @@ class Filters extends BaseConfig
 			'login' => ['except' => [
 				'login',
 				'logout',
+				'forget',
+				'resetpassword'
 			]],
 		],
 		'after'  => [

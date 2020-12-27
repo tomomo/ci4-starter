@@ -2,7 +2,9 @@
 
 <?= $this->section('contents') ?>
 <div class="container w-50">
-  <h1>Login</h1>
+  <h1>
+    <?= lang('App.func.Login') ?>
+  </h1>
   <?= form_open('/login') ?>
   <?= $this->include('layouts/alert/success.html') ?>
   <?= $this->include('layouts/alert/error.html') ?>
@@ -22,6 +24,36 @@
       <?= lang('App.login') ?>
     </button>
   </div>
+  <div class="my-2">
+    <a class="btn btn-link" href="/forget">
+      <?= lang('App.func.forget') ?>
+    </a>
+  </div>
   <?= form_close() ?>
 </div>
+<?= $this->endSection() ?>
+
+
+<?= $this->section('styles') ?>
+<style>
+  form .form-control {
+    position: relative;
+  }
+
+  form .form-control:focus {
+    z-index: 2;
+  }
+
+  form input[name="account"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  form input[name="password"] {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+</style>
 <?= $this->endSection() ?>

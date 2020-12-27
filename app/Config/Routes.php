@@ -35,6 +35,10 @@ $routes->get('/', 'Home::index', ['as' => 'home']);
 $routes->get('/login', 'Auth::showLoginPage', ['as' => 'login']);
 $routes->post('/login', 'Auth::login');
 $routes->get('/logout', 'Auth::logout', ['as' => 'logout']);
+$routes->get('/forget', 'Auth::showForgetPasswordPage', ['as' => 'forget']);
+$routes->post('/forget', 'Auth::sendMailRequestResetPassword');
+$routes->get('/resetpassword', 'Auth::showResetPasswordPage', ['as' => 'resetpassword']);
+$routes->post('/resetpassword', 'Auth::resetPassword');
 
 $routes->presenter('informations', ['controller' => 'Informations']);
 $routes->resource('api/informations', [

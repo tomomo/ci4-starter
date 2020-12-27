@@ -9,6 +9,8 @@
 
 namespace App\Controllers;
 
+use CodeIgniter\Exceptions\PageNotFoundException;
+
 /**
  * Class Example
  *
@@ -62,4 +64,85 @@ class Auth extends BaseController
 		service('authentication')->logout();
 		return redirect()->route('home');
 	}
+
+	/**
+	 * パスワード再発行依頼画面表示
+	 *
+	 * @return object View
+	 */
+	public function showForgetPasswordPage()
+	{
+		helper('form');
+
+		$data = [];
+		return view('pages/auth/forget.html', $data);
+	}
+
+	/**
+	 * パスワード再発行依頼メール送信
+	 *
+	 * @return object View
+	 */
+	public function sendMailRequestResetPassword()
+	{
+		$account = $this->request->getPost('account');
+
+		$send = service('authentication')->sendMailPasswordReset($account);
+		if ($send->status)
+		{
+			return redirect()
+			->to('/login')
+			->with('success', $send);
+		}
+		return redirect()
+			->back()
+			->withInput()
+			->with('error', $send);
+	}
+
+	/**
+	 * パスワード再設定画面表示
+	 *
+	 * @return object View
+	 */
+	public function showResetPasswordPage()
+	{
+		helper('form');
+
+		$account = $this->request->getGet('account');
+		$token   = $this->request->getGet('token');
+		if (! $user = service('authentication')->findByToken($account, $token))
+		{
+			throw PageNotFoundException::forPageNotFound();
+		}
+		$data = compact('user');
+		return view('pages/auth/resetpassword.html', $data);
+	}
+
+	/**
+	 * パスワード再設定処理
+	 *
+	 * @return object Redirect
+	 */
+	public function resetPassword()
+	{
+		helper('form');
+
+		$reseted = service('authentication')->resetPassword(
+			$this->request->getPost('account'),
+			$this->request->getPost('token'),
+			$this->request->getPost('password')
+		);
+		if ($reseted->status)
+		{
+			return redirect()
+			->to('/login')
+			->with('success', $reseted);
+		}
+		return redirect()
+			->back()
+			->withInput()
+			->with('error', $reseted);
+	}
+
 }
