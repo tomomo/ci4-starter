@@ -119,7 +119,7 @@ class Authentication
 		$validation = service('validation');
 
 		$params = compact('account');
-		$validation->setRule('account', lang('App.user.email'), 'required|valid_email');
+		$validation->setRule('account', lang('App.account'), 'required|valid_email');
 		if (! $validation->run($params))
 		{
 			return (object) [
@@ -171,8 +171,6 @@ class Authentication
 	 */
 	public function findByToken(string $account, string $token)
 	{
-		// http://localhost/resetpassword?email=eclairpark%40gmail.com&token=e015d919e36ac3e43fad9ed02692362b7453c132
-		// 	if (! $user = service('authentication')->findByToken($email, $token))
 		$model = model('UserModel');
 		$user  = $model->findByEmail($account);
 
