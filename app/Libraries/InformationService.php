@@ -27,9 +27,15 @@ class InformationService
 	 */
 	public function searchPage(array $params)
 	{
+		$sortFields = [
+			'subject'    => 'subject',
+			'created_at' => 'created_at',
+			'updated_at' => 'updated_at',
+		];
+
 		$information = model('InformationModel')
 			->search($params)
-			->sort($params)
+			->sort($sortFields, $params)
 			->page();
 		return $information;
 	}

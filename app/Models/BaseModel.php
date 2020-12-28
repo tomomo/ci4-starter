@@ -45,4 +45,25 @@ class BaseModel extends \CodeIgniter\Model
 						  ];
 		return $data;
 	}
+
+	/**
+	 * ソート
+	 *
+	 * @param array $fields ソート情報
+	 * @param array $params ソート条件 $params s:対象項目
+	 *                                         o:昇順/降順
+	 *
+	 * @return object UserModel
+	 */
+	public function sort(array $fields, array $params = null)
+	{
+		if (isset($params['s']) && (isset($fields[mb_strtolower($params['s'])])))
+		{
+			$sort  = $fields[mb_strtolower($params['s'])];
+			$order = mb_strtolower($params['o'] ?? null);
+			$order = (in_array($order, ['asc', 'desc'])) ? $order : 'asc';
+			$this->orderBy($sort, $order);
+		}
+		return $this;
+	}
 }

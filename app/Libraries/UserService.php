@@ -28,11 +28,17 @@ class UserService
 	public function searchPage(array $params)
 	{
 		$excludeUserId = service('authentication')->me('id');
+		$sortFields    = [
+			'email'      => 'email',
+			'name'       => 'name_kana',
+			'created_at' => 'created_at',
+			'updated_at' => 'updated_at',
+		];
 
 		$user = model('UserModel')
 			->exclude($excludeUserId)
 			->search($params)
-			->sort($params)
+			->sort($sortFields, $params)
 			->page();
 		return $user;
 	}
