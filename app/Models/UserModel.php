@@ -33,7 +33,9 @@ class UserModel extends BaseModel
 	 *
 	 * @var $returnType
 	 */
-	protected $returnType = 'App\Entities\User'; //'object';
+	protected $returnType = 'App\Entities\User';
+	// @REVIWE Entityを指定した場合、created_atなどのjsonの内容が変わる。
+
 	/**
 	 * 論理削除フラグ
 	 *

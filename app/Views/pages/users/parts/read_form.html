@@ -23,4 +23,20 @@
       <?= esc($user->name_kana ?? '') ?>
     </div>
   </div>
+  <div class="col-12">
+    <label for="inputCreatedAt" class="form-label">
+      <?= lang('App.user.createdAt') ?>
+    </label>
+    <div class="p-2">
+      <?= esc($user->created_at ?? '') ?>
+    </div>
+  </div>
+  <div class="col-12">
+    <label for="inputUpdatedAt" class="form-label">
+      <?= lang('App.user.updatedAt') ?>
+    </label>
+    <div class="p-2">
+      <?= esc($user->updated_at ?? '') ?>
+    </div>
+  </div>
 </div>

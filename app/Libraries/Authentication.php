@@ -14,6 +14,8 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 /**
  * Authentication Library Class
  *
+ * ＠TODO 認証関連をサービスに落とし込めコントローラーが簡素化するものの、session使うことが前提の機能になってしまう。
+ *
  * @package Library
  */
 class Authentication
@@ -77,7 +79,7 @@ class Authentication
 	}
 
 	/**
-	 * ログイン処理
+	 * 認証済確認処理
 	 *
 	 * @return boolean
 	 */
@@ -141,17 +143,18 @@ class Authentication
 
 			$passwordResetURL = base_url('/resetpassword?account=' . $user->email . '&token=' . $token);
 
+			// @TODO 何処でも使うため、メール送信機能は切り離すべき。スレッド化するべき。
 			$email = service('email');
 			$email
-				->setFrom('noreply@eclairpark', lang('App.email.noreply'))
+				->setFrom('noreply@example.com', lang('App.email.noreply'))
 				->setTo($user->email)
 				->setSubject(lang('App.email.requestPasswordResetSubject'))
 				// ->setMessage(lang('App.email.requestPasswordResetMessage', [$user->name, $url]));
 				->setMessage($passwordResetURL);
 
-			// @TODO ルート検証のため無効化
-			// $email->send();
-			// log_message('debug', $email->printDebugger());
+			$email->send();
+			log_message('notice', __METHOD__ . ' to: ' . $user->email);
+			log_message('notice', $email->printDebugger());
 		}
 
 		return (object)
