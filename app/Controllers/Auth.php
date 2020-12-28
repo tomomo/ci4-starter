@@ -166,11 +166,15 @@ class Auth extends BaseController
 	{
 		helper('form');
 
-		if (! $user = service('authentication')->me())
+		if (! session()->has('loggedin'))
 		{
 			throw PageNotFoundException::forPageNotFound();
 		}
-
+		$user = service('profileService')->find($this->session->loggedin->id);
+		if (! $user)
+		{
+			throw PageNotFoundException::forPageNotFound();
+		}
 		$data = compact('user');
 		return view('pages/auth/profile.html', $data);
 	}
@@ -182,17 +186,14 @@ class Auth extends BaseController
 	 */
 	public function updateProfile()
 	{
-		// @TODO 一旦updateするものとするが、アカウント変更は新しいメール先から承認するようなロジックであるべき
-		if (! $user = service('authentication')->me())
+		if (! session()->has('loggedin'))
 		{
 			throw PageNotFoundException::forPageNotFound();
 		}
-		$id      = $user->id;
 		$params  = $this->request->getPost();
-		$updated = service('userService')->update($id, $params);
+		$updated = service('userService')->update($this->session->loggedin->id, $params);
 		if ($updated->status)
 		{
-			// @TODO DBは修正されているが、session情報を入れかえる作業が必要
 			return redirect()
 			->to('/profile')
 			->with('success', $updated);

@@ -16,8 +16,29 @@
       <?= print_r(session('loggedin'),true) ?>
     </p>
   </div>
-  <a class="btn btn-link" href="/logout">
-    <?= lang('App.logout') ?>
-  </a>
+  <div>
+    <ul class="list-group">
+      <li class="list-group-item">
+        <a class="btn btn-link" href="/informations">
+          <?= lang('App.func.informations') ?>
+        </a>
+      </li>
+      <li class="list-group-item">
+        <a class="btn btn-link" href="/users">
+          <?= lang('App.func.users') ?>
+        </a>
+      </li>
+      <li class="list-group-item">
+        <a class="btn btn-link" href="/profile">
+          <?= lang('App.func.profile') ?>
+        </a>
+      </li>
+      <li class="list-group-item">
+        <a class="btn btn-link" href="/logout">
+          <?= lang('App.logout') ?>
+        </a>
+      </li>
+    </ul>
+  </div>
 </div>
 <?= $this->endSection('contents') ?>

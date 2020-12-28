@@ -26,6 +26,15 @@ class Services extends CoreServices
 		return new \App\Libraries\Authentication();
 	}
 
+	public static function profileService($getShared = true)
+	{
+		if ($getShared)
+		{
+			return static::getSharedInstance('profileService');
+		}
+		return new \App\Libraries\ProfileService();
+	}
+
 	public static function informationService($getShared = true)
 	{
 		if ($getShared)

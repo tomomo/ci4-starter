@@ -9,8 +9,6 @@
 
 namespace App\Libraries;
 
-use CodeIgniter\Exceptions\PageNotFoundException;
-
 /**
  * InformationService Library Class
  *
