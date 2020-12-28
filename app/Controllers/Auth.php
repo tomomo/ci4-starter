@@ -145,4 +145,50 @@ class Auth extends BaseController
 			->with('error', $reseted);
 	}
 
+	/**
+	 * プロフィール画面表示
+	 *
+	 * @return object View
+	 */
+	public function showProfilePage()
+	{
+		helper('form');
+
+		if (! $user = service('authentication')->me())
+		{
+			throw PageNotFoundException::forPageNotFound();
+		}
+
+		$data = compact('user');
+		return view('pages/auth/profile.html', $data);
+	}
+
+	/**
+	 * プロフィール更新処理
+	 *
+	 * @return object Redirect
+	 */
+	public function updateProfile()
+	{
+		// @TODO 一旦updateするものとするが、アカウント変更は新しいメール先から承認するようなロジックであるべき
+		if (! $user = service('authentication')->me())
+		{
+			throw PageNotFoundException::forPageNotFound();
+		}
+		$id      = $user->id;
+		$params  = $this->request->getPost();
+		$updated = service('userService')->update($id, $params);
+		if ($updated->status)
+		{
+			// @TODO DBは修正されているが、session情報を入れかえる作業が必要
+			return redirect()
+			->to('/profile')
+			->with('success', $updated);
+		}
+		return redirect()
+			->back()
+			->withInput()
+			->with('error', $updated);
+	}
+
 }

@@ -37,7 +37,7 @@ class Authentication
 	 */
 	public function login(string $account = null, string $password = null)
 	{
-		$user = model('UserModel')->findByEmail($account);
+		$user = model('UserModel')->asObject()->findByEmail($account);
 		if (! ($user && password_verify($password, $user->password)))
 		{
 			return (object)
@@ -46,14 +46,9 @@ class Authentication
 					'message' => lang('App.unauthorized'),
 				];
 		}
-		session()->set([
-					 $this->loginSessionName => (object)
-							[
-								'id'    => $user->id,
-								'email' => $user->email,
-								'name'  => $user->name,
-							],
-				 ]);
+		// phpcs:ignore
+		unset($user->password, $user->remember_token, $user->remember_token_at);
+		session()->set([$this->loginSessionName => $user]);
 		return (object)
 			[
 				'status'  => true,
