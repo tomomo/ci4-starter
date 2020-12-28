@@ -44,9 +44,10 @@ class Auth extends BaseController
 		$authenticationed = service('authentication')->login($account, $password);
 		if ($authenticationed->status)
 		{
+			session()->set(['loggedin' => $authenticationed->data]);
 			return redirect()
-			->to('/')
-			->with('success', $authenticationed);
+				->to('/')
+				->with('success', $authenticationed);
 		}
 		return redirect()
 			->back()
@@ -61,7 +62,18 @@ class Auth extends BaseController
 	 */
 	public function logout()
 	{
-		service('authentication')->logout();
+		$_SESSION = [];
+		if (ini_get('session.use_cookies'))
+		{
+			$argv = session_get_cookie_params();
+			setcookie(session_name(), '', time() - 42000,
+				$argv['path'],
+				$argv['domain'],
+				$argv['secure'],
+				$argv['httponly']
+			);
+		}
+		session_destroy();
 		return redirect()->route('home');
 	}
 
@@ -81,7 +93,7 @@ class Auth extends BaseController
 	/**
 	 * パスワード再発行依頼メール送信
 	 *
-	 * @return object View
+	 * @return object Redirect
 	 */
 	public function sendMailRequestResetPassword()
 	{

@@ -39,8 +39,7 @@ class Login implements \CodeIgniter\Filters\FilterInterface {
 		$controller = strtolower(end($controller));
 		$exclude    = ! in_array($controller, ['example']);
 
-		$authentication = service('authentication');
-		if (! $authentication->isLoggedIn() && $exclude)
+		if (! session()->has('loggedin') && $exclude)
 		{
 			return redirect()->to('/login');
 		}

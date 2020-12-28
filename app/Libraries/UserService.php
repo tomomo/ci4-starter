@@ -21,13 +21,14 @@ class UserService
 	/**
 	 * 一覧データ取得
 	 *
-	 * @param array $params 検索条件、ソート条件
+	 * @param array  $params    検索条件、ソート条件
+	 * @param object $loginUser ログインユーザー情報
 	 *
 	 * @return object
 	 */
-	public function searchPage(array $params)
+	public function searchPage(array $params, $loginUser)
 	{
-		$excludeUserId = service('authentication')->me('id');
+		$excludeUserId = $loginUser->id;
 		$sortFields    = [
 			'email'      => 'email',
 			'name'       => 'name_kana',
@@ -44,21 +45,16 @@ class UserService
 	}
 
 	/**
-	 * 単体データ取得
+	 * 単体データ取得（自身を除く）
 	 *
-	 * @param string $id ID
+	 * @param string $id        ID
+	 * @param object $loginUser ログインユーザー
 	 *
 	 * @return object
 	 */
-	public function find(string $id = null)
+	public function find(string $id, object $loginUser)
 	{
-		if (empty($id))
-		{
-			return null;
-		}
-
-		$excludeUserId = service('authentication')->me('id');
-		return model('UserModel')->exclude($excludeUserId)->find($id);
+		return model('UserModel')->exclude($loginUser->id)->find($id);
 	}
 
 	/**

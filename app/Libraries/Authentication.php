@@ -14,19 +14,10 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 /**
  * Authentication Library Class
  *
- * ＠TODO 認証関連をサービスに落とし込めコントローラーが簡素化するものの、session使うことが前提の機能になってしまう。
- *
  * @package Library
  */
 class Authentication
 {
-	/**
-	 * セッション名;
-	 *
-	 * @var $loginSessionName
-	 */
-	protected $loginSessionName = 'loggedin';
-
 	/**
 	 * ログイン
 	 *
@@ -48,60 +39,12 @@ class Authentication
 		}
 		// phpcs:ignore
 		unset($user->password, $user->remember_token, $user->remember_token_at);
-		session()->set([$this->loginSessionName => $user]);
 		return (object)
 			[
 				'status'  => true,
 				'message' => lang('App.authorized'),
+				'data'    => $user,
 			];
-	}
-
-	/**
-	 * ログイン情報取得
-	 *
-	 * @param string $key キー名
-	 *
-	 * @return object ログイン情報
-	 */
-	public function me(string $key = null)
-	{
-		$data = session($this->loginSessionName);
-		if ($key)
-		{
-			return $data->{$key} ?? null;
-		}
-		return $data;
-	}
-
-	/**
-	 * 認証済確認処理
-	 *
-	 * @return boolean
-	 */
-	public function isLoggedIn()
-	{
-		return session()->has($this->loginSessionName);
-	}
-
-	/**
-	 * ログアウト処理
-	 *
-	 * @return void
-	 */
-	public function logout()
-	{
-		$_SESSION = [];
-		if (ini_get('session.use_cookies'))
-		{
-			$argv = session_get_cookie_params();
-			setcookie(session_name(), '', time() - 42000,
-				$argv['path'],
-				$argv['domain'],
-				$argv['secure'],
-				$argv['httponly']
-			);
-		}
-		session_destroy();
 	}
 
 	/**

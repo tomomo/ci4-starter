@@ -30,7 +30,7 @@ class Users extends BaseController
 		$params = $this->request->getGet();
 		setCookie('users', http_build_query($params));
 
-		$user = service('userService')->searchPage($params);
+		$user = service('userService')->searchPage($params, $this->session->loggedin);
 
 		$data = compact('user', 'params');
 		return view('pages/users/index.html', $data);
@@ -47,7 +47,7 @@ class Users extends BaseController
 	{
 		helper(['form', 'cookie']);
 
-		if (! $user = service('userService')->find($id))
+		if (! $user = service('userService')->find($id, $this->session->loggedin))
 		{
 			throw PageNotFoundException::forPageNotFound();
 		}
@@ -79,7 +79,7 @@ class Users extends BaseController
 	{
 		helper(['form', 'cookie']);
 
-		if (! $user = service('userService')->find($id))
+		if (! $user = service('userService')->find($id, $this->session->loggedin))
 		{
 			throw PageNotFoundException::forPageNotFound();
 		}
@@ -99,7 +99,7 @@ class Users extends BaseController
 	{
 		helper(['form', 'cookie']);
 
-		if (! $user = service('userService')->find($id))
+		if (! $user = service('userService')->find($id, $this->session->loggedin))
 		{
 			throw PageNotFoundException::forPageNotFound();
 		}
