@@ -17,6 +17,14 @@
   <?= $this->include('layouts/alert/success.html') ?>
   <?= $this->include('layouts/alert/error.html') ?>
   <div class="row g-3">
+    <div class="col-12">
+      <label for="inputEmail" class="form-label">
+        <?= lang('App.user.email') ?>
+      </label>
+      <div class="p-2">
+        <?= esc($user->email ?? '') ?>
+      </div>
+    </div>
     <?= $this->include('pages/users/parts/input_form.html') ?>
   </div>
   <div class="my-3">
