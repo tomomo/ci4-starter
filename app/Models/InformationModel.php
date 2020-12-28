@@ -61,8 +61,14 @@ class InformationModel extends BaseModel
 	 * @var $allowedFields
 	 */
 	protected $validationRules = [
-		'subject' => 'required|max_length[100]',
-		'message' => 'required|max_length[800]',
+		'subject' => [
+			'label' => 'App.information.subject',
+			'rules' => 'required|max_length[100]',
+		],
+		'message' => [
+			'label' => 'App.information.message',
+			'rules' => 'required|max_length[100]',
+		],
 	];
 
 	/**

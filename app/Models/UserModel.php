@@ -67,10 +67,22 @@ class UserModel extends BaseModel
 	 * @var $allowedFields
 	 */
 	protected $validationRules = [
-		'email'     => 'required|valid_email|is_unique[users.email,id,{id}]',
-		'name'      => 'required|max_length[50]',
-		'name_kana' => 'required|max_length[100]|hiragana',
-		'password'  => 'required',
+		'email'     => [
+			'label' => 'App.user.email',
+			'rules' => 'required|valid_email|is_unique[users.email,id,{id}]',
+		],
+		'name'      => [
+			'label' => 'App.user.name',
+			'rules' => 'required|max_length[50]',
+		],
+		'name_kana' => [
+			'label' => 'App.user.nameKana',
+			'rules' => 'required|max_length[100]|hiragana',
+		],
+		'password'  => [
+			'label' => 'App.user.password',
+			'rules' => 'required',
+		],
 	];
 
 	/**

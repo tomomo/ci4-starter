@@ -76,6 +76,6 @@ if (! function_exists('anchor_back_to_index'))
 	): string
 	{
 		$uri .= ((get_cookie($cookieName)) ? '?' : '') . get_cookie($cookieName);
-		return anchor($uri, lang($title), $attributes);
+		return anchor($uri, $title, $attributes);
 	}
 }
