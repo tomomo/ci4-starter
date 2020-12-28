@@ -19,7 +19,9 @@
   <?= form_open('/informations/update/' . $information->id) ?>
   <?= $this->include('layouts/alert/success.html') ?>
   <?= $this->include('layouts/alert/error.html') ?>
-  <?= $this->include('pages/informations/parts/read_form.html') ?>
+  <div class="row g-3">
+    <?= $this->include('pages/informations/parts/read_form.html') ?>
+  </div>
   <?= form_close("\n") ?>
   <div class="my-3">
     <?= $this->include('pages/informations/parts/index_link.html') ?>

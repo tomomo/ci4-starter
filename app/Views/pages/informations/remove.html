@@ -14,7 +14,9 @@
     </a>
   </div>
   <?= form_open('/informations/delete/' . $information->id) ?>
-  <?= $this->include('pages/informations/parts/read_form.html') ?>
+  <div class="row g-3">
+    <?= $this->include('pages/informations/parts/read_form.html') ?>
+  </div>
   <div class="my-3">
     <button class="btn btn-danger">
       <?= lang('App.delete') ?>

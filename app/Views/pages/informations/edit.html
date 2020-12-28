@@ -16,7 +16,9 @@
   <?= form_open('/informations/update/' . $information->id) ?>
   <?= $this->include('layouts/alert/success.html') ?>
   <?= $this->include('layouts/alert/error.html') ?>
-  <?= $this->include('pages/informations/parts/input_form.html') ?>
+  <div class="row g-3">
+    <?= $this->include('pages/informations/parts/input_form.html') ?>
+  </div>
   <div class="my-3">
     <button class="btn btn-success">
       <?= lang('App.update') ?>
