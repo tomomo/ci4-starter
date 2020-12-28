@@ -55,16 +55,16 @@
         <th>
         </th>
         <th>
-          <?= sort_anchor('/users', $params, 'email', lang('App.user.email')) ?>
+          <?= anchor_sort('/users', $params, 'email', lang('App.user.email')) ?>
         </th>
         <th>
-          <?= sort_anchor('/users', $params, 'name', lang('App.user.name')) ?>
+          <?= anchor_sort('/users', $params, 'name', lang('App.user.name')) ?>
         </th>
         <th>
-          <?= sort_anchor('/users', $params, 'created_at', lang('App.user.created_at')) ?>
+          <?= anchor_sort('/users', $params, 'created_at', lang('App.created_at')) ?>
         </th>
         <th>
-          <?= sort_anchor('/users', $params, 'updated_at', lang('App.user.updated_at')) ?>
+          <?= anchor_sort('/users', $params, 'updated_at', lang('App.updated_at')) ?>
         </th>
       </tr>
     </thead>
@@ -80,7 +80,7 @@
           <?= $item->email ?>
         </td>
         <td>
-          <?= $item->name ?>
+          <?= \esc($item->name) ?>
         </td>
         <td>
           <?= $item->created_at ?>

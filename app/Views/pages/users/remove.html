@@ -24,7 +24,7 @@
   </div>
   <?= form_close("\n") ?>
   <div class="my-3">
-    <?= $this->include('pages/users/parts/index_link.html') ?>
+    <?= anchor_back_to_index('/users', 'App.backToIndex', 'users', ['class' => 'btn btn-link']) ?>
   </div>
 </div>
 <?= $this->endSection() ?>

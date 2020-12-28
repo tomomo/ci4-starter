@@ -14,7 +14,7 @@ namespace App\Database\Migrations;
  *
  * @package CodeIgniter
  */
-class Migration_create_informations_table extends \CodeIgniter\Database\Migration
+class Migration_create_users_table extends \CodeIgniter\Database\Migration
 {
 	/**
 	 * テーブル名

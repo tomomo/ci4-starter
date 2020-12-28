@@ -7,33 +7,31 @@
  * @license http://www.opensource.org/licenses/mit-license.html  MIT License
  */
 
-if (! function_exists('sort_anchor'))
+if (! function_exists('anchor_sort'))
 {
 	/**
 	 * ソート用リンク
 	 *
-	 * @param string           $uri        URI string or array of URI segments
-	 * @param array|null       $params     QueryString Array
-	 * @param string           $id         ID
-	 * @param string           $name       Name
-	 * @param mixed            $attributes Any attributes
-	 * @param \Config\App|null $altConfig  Alternate configuration to use
+	 * @param string $uri        URI string or array of URI segments
+	 * @param array  $params     QueryString Array
+	 * @param string $sortKey    ソートキー
+	 * @param string $title      ラベル
+	 * @param mixed  $attributes Any attributes
 	 *
 	 * @return string
 	 */
-	function sort_anchor(
+	function anchor_sort(
 		string $uri = '',
 		array $params = [],
-		string $id = '',
-		string $name = '',
-		$attributes = '',
-		$altConfig = null
+		string $sortKey = '',
+		string $title = '',
+		$attributes = ''
 	): string
 	{
 		$p = $params;
 		unset($p['page']);
-		$p['s'] = $id;
-		if (isset($params['s']) && $id === $params['s'])
+		$p['s'] = $sortKey;
+		if (isset($params['s']) && $sortKey === $params['s'])
 		{
 			if (empty($params['o']) || $params['o'] === 'asc')
 			{
@@ -52,8 +50,32 @@ if (! function_exists('sort_anchor'))
 			unset($p['o']);
 			$flag = '';
 		}
-		$uri  .= '?' . http_build_query($p);
-		$label = lang($name) . $flag;
-		return anchor($uri, $label, $attributes);
+		$uri   .= '?' . http_build_query($p);
+		$title .= $flag;
+		return anchor($uri, $title, $attributes);
+	}
+}
+
+if (! function_exists('anchor_back_to_index'))
+{
+	/**
+	 * 一覧戻る用リンク
+	 *
+	 * @param string $uri        URI string or array of URI segments
+	 * @param string $title      Title
+	 * @param string $cookieName クッキー名
+	 * @param mixed  $attributes Any Attribute
+	 *
+	 * @return string
+	 */
+	function anchor_back_to_index(
+		string $uri = '',
+		string $title = '',
+		string $cookieName = '',
+		$attributes = ''
+	): string
+	{
+		$uri .= ((get_cookie($cookieName)) ? '?' : '') . get_cookie($cookieName);
+		return anchor($uri, lang($title), $attributes);
 	}
 }

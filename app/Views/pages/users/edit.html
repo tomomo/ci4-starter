@@ -13,7 +13,7 @@
       <?= lang('App.show') ?>
     </a>
   </div>
-  <?= form_open('/users/update/' . $user->id) ?>
+  <?= form_open('/users/update/' . $user->id, ['class' => 'form-floating']) ?>
   <?= $this->include('layouts/alert/success.html') ?>
   <?= $this->include('layouts/alert/error.html') ?>
   <div class="row g-3">
@@ -34,7 +34,7 @@
   </div>
   <?= form_close("\n") ?>
   <div class="my-3">
-    <?= $this->include('pages/users/parts/index_link.html') ?>
+    <?= anchor_back_to_index('/users', 'App.backToIndex', 'users', ['class' => 'btn btn-link']) ?>
   </div>
 </div>
 <?= $this->endSection() ?>

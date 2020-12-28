@@ -55,13 +55,13 @@
         <th>
         </th>
         <th>
-          <?= sort_anchor('/informations', $params, 'subject', lang('App.information.subject')) ?>
+          <?= anchor_sort('/informations', $params, 'subject', lang('App.information.subject')) ?>
         </th>
         <th>
-          <?= sort_anchor('/informations', $params, 'created_at', lang('App.information.created_at')) ?>
+          <?= anchor_sort('/informations', $params, 'created_at', lang('App.created_at')) ?>
         </th>
         <th>
-          <?= sort_anchor('/informations', $params, 'updated_at', lang('App.information.updated_at')) ?>
+          <?= anchor_sort('/informations', $params, 'updated_at', lang('App.updated_at')) ?>
         </th>
       </tr>
     </thead>
@@ -74,7 +74,7 @@
           </a>
         </td>
         <td>
-          <?= $item->subject ?>
+          <?= \esc($item->subject) ?>
         </td>
         <td>
           <?= $item->created_at ?>
