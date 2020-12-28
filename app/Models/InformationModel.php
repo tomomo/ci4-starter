@@ -14,7 +14,7 @@ namespace App\Models;
  *
  * @package CodeIgniter
  */
-class InformationModel extends \CodeIgniter\Model
+class InformationModel extends BaseModel
 {
 	 /**
 	  * テーブル名
@@ -64,22 +64,6 @@ class InformationModel extends \CodeIgniter\Model
 		'subject' => 'required|max_length[100]',
 		'message' => 'required|max_length[800]',
 	];
-
-	/**
-	 * ページ単位出力
-	 *
-	 * @return object
-	 */
-	public function page()
-	{
-		$total = $this->countAllResults(false);
-		$data  = (object) [
-							  'total' => $total,
-							  'items' => $this->paginate(),
-							  'pager' => $this->pager,
-						  ];
-		return $data;
-	}
 
 	/**
 	 * 汎用的検索クエリ

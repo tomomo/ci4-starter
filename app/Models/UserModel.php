@@ -14,7 +14,7 @@ namespace App\Models;
  *
  * @package CodeIgniter
  */
-class UserModel extends \CodeIgniter\Model
+class UserModel extends BaseModel
 {
 	 /**
 	  * テーブル名
@@ -33,7 +33,7 @@ class UserModel extends \CodeIgniter\Model
 	 *
 	 * @var $returnType
 	 */
-	protected $returnType = 'object';
+	protected $returnType = 'App\Entities\User'; //'object';
 	/**
 	 * 論理削除フラグ
 	 *
@@ -70,22 +70,6 @@ class UserModel extends \CodeIgniter\Model
 		'name_kana' => 'required|max_length[100]|hiragana',
 		'password'  => 'required',
 	];
-
-	/**
-	 * ページ単位出力
-	 *
-	 * @return object
-	 */
-	public function page()
-	{
-		$total = $this->countAllResults(false);
-		$data  = (object) [
-							  'total' => $total,
-							  'items' => $this->paginate(),
-							  'pager' => $this->pager,
-						  ];
-		return $data;
-	}
 
 	/**
 	 * 汎用的検索クエリ
