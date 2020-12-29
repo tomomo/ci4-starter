@@ -1,9 +1,9 @@
-<?= $this->extend('layouts/base.html') ?>
+<?= $this->extend('pages/auth/base.html') ?>
 
 <?= $this->section('contents') ?>
-<div class="container w-50">
+<div class="container w-50 text-center">
   <h1>
-    <?= lang('App.func.Login') ?>
+    <?= lang('App.login') ?>
   </h1>
   <?= form_open('/login') ?>
   <?= $this->include('layouts/alert/success.html') ?>
@@ -12,11 +12,13 @@
     'class' => 'form-control',
     'autofocus' => true,
     'name' => 'account',
+    'placeholder' => lang('App.acctountPlaceholder'),
     'value' => old('account', ''),
   ]) ?>
   <?= form_password([
     'class' => 'form-control',
     'autocomplate' => 'off',
+    'placeholder' => lang('App.passwordPlaceholder'),
     'name' => 'password',
   ]) ?>
   <div class="my-2">
@@ -26,7 +28,7 @@
   </div>
   <div class="my-2">
     <a class="btn btn-link" href="/forget">
-      <?= lang('App.func.forget') ?>
+      <?= lang('App.forget') ?>
     </a>
   </div>
   <?= form_close() ?>

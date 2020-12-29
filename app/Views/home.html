@@ -13,23 +13,23 @@
   <div class="card card-body my-3">
     <h5 class="card-title">User-session</h5>
     <p class="card-text">
-      <?= print_r(session('loggedin'),true) ?>
+      <?= var_dump(session('loggedin')) ?>
     </p>
   </div>
   <div>
     <ul class="list-group">
       <li class="list-group-item">
         <a class="btn btn-link" href="/informations">
-          <?= lang('App.func.informations') ?>
+          <?= lang('App.func.information') ?>
         </a>
       </li>
       <li class="list-group-item">
         <a class="btn btn-link" href="/users">
-          <?= lang('App.func.users') ?>
+          <?= lang('App.func.user') ?>
         </a>
       </li>
       <li class="list-group-item">
-        <a class="btn btn-link" href="/profile">
+        <a class="btn btn-link" href="/profiles/edit">
           <?= lang('App.func.profile') ?>
         </a>
       </li>

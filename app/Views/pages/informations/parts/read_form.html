@@ -14,3 +14,19 @@
     <?= nl2br(esc($information->message ?? '')) ?>
   </div>
 </div>
+<div class="col-12">
+  <label for="inputCreatedAt" class="form-label">
+    <?= lang('App.createdAt') ?>
+  </label>
+  <div class="p-2">
+    <?= esc($information->createdAt ?? '') ?>
+  </div>
+</div>
+<div class="col-12">
+  <label for="inputUpdatedAt" class="form-label">
+    <?= lang('App.updatedAt') ?>
+  </label>
+  <div class="p-2">
+    <?= esc($information->updated_at ?? '') ?>
+  </div>
+</div>

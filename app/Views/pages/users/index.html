@@ -2,12 +2,7 @@
 
 <?= $this->section('contents') ?>
 <div class="container-fluid">
-  <h1>
-    <?= lang('App.func.user') ?>
-    <span class="lead">
-      <?= lang('App.index') ?>
-    </span>
-  </h1>
+  <?= h1_title(lang('App.func.user'), lang('App.index')) ?>
   <?= $this->include('layouts/alert/success.html') ?>
   <?= $this->include('layouts/alert/error.html') ?>
   <div class="card my-1">
@@ -25,19 +20,16 @@
     <div class="card-footer">
       <div class="my-1">
         <button class="btn btn-primary">
+          <i class="fas fa-search"></i>
           <?= lang('App.search') ?>
         </button>
-        <a class="btn btn-secondary" href="/users">
-          <?= lang('App.reset') ?>
-        </a>
+        <?= anchor('/users', lang('App.reset'), 'class="btn btn-secondary"') ?>
       </div>
     </div>
     <?= form_close() ?>
   </div>
   <div class="my-2">
-    <a class="btn btn-link" href="/users/new">
-      <?= lang('App.new') ?>
-    </a>
+    <?= anchor('/users/new', '<i class="fas fa-edit"></i>' . lang('App.new'), 'class="btn btn-link"') ?>
   </div>
   <div class="d-flex flex-column flex-sm-row justify-content-sm-between">
     <div class="my-2">
@@ -61,10 +53,10 @@
           <?= anchor_sort('/users', $params, 'name', lang('App.user.name')) ?>
         </th>
         <th>
-          <?= anchor_sort('/users', $params, 'created_at', lang('App.created_at')) ?>
+          <?= anchor_sort('/users', $params, 'createdAt', lang('App.createdAt')) ?>
         </th>
         <th>
-          <?= anchor_sort('/users', $params, 'updated_at', lang('App.updated_at')) ?>
+          <?= anchor_sort('/users', $params, 'updatedAt', lang('App.updatedAt')) ?>
         </th>
       </tr>
     </thead>
@@ -72,9 +64,7 @@
       <? foreach($user->items as $item) : ?>
       <tr>
         <td>
-          <a class="btn btn-link" href="<?= base_url('users/' . $item->id) ?>">
-            <?= lang('App.show') ?>
-          </a>
+          <?= anchor('/users/' . $item->id, '<i class="fas fa-edit"></i>') ?>
         </td>
         <td>
           <?= $item->email ?>

@@ -1,20 +1,18 @@
-<?= $this->extend('layouts/base.html') ?>
+<?= $this->extend('pages/auth/base.html') ?>
 
 <?= $this->section('contents') ?>
-<div class="container w-50">
+<div class="container w-50 text-center">
   <h1>
     <?= lang('App.func.forgetPassword') ?>
   </h1>
   <?= form_open() ?>
   <?= $this->include('layouts/alert/success.html') ?>
   <?= $this->include('layouts/alert/error.html') ?>
-  <label class="form-label" for="inputAccount">
-    <?= lang('App.account') ?>
-  </label>
   <?= form_input([
     'class' => 'form-control',
     'id' => 'inputAccount',
     'name' => 'account',
+    'placeholder' => lang('App.acctountPlaceholder'),
     'value' => old('account', ''),
   ]) ?>
   <div class="my-2">
@@ -24,8 +22,8 @@
   </div>
   <?= form_close() ?>
   <div class="my-3">
-    <a class="btn btn-link" href="/">
-      <?= lang('App.func.home') ?>
+    <a class="btn btn-link" href="/login">
+      <?= lang('App.login') ?>
     </a>
   </div>
 </div>

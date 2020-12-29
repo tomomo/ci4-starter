@@ -2,16 +2,9 @@
 
 <?= $this->section('contents') ?>
 <div class="container-fluid">
-  <h1>
-    <?= lang('App.func.information') ?>
-    <span class="lead">
-      <?= lang('App.remove') ?>
-    </span>
-  </h1>
+  <?= h1_title(lang('App.func.information'), lang('App.remove')) ?>
   <div class="my-2">
-    <a class="btn btn-link" href="/informations/<?= $information->id ?>">
-      <?= lang('App.show') ?>
-    </a>
+    <?= anchor('/informations/' . $information->id, lang('App.show'), 'class="btn btn-link"') ?>
   </div>
   <?= form_open('/informations/delete/' . $information->id) ?>
   <div class="row g-3">
@@ -19,12 +12,13 @@
   </div>
   <div class="my-3">
     <button class="btn btn-danger">
+      <i class="fas fa-trash"></i>
       <?= lang('App.delete') ?>
     </button>
   </div>
   <?= form_close("\n") ?>
   <div class="my-3">
-    <?= anchor_back_to_index('/informations', lang('App.backToIndex'), 'informations', ['class' => 'btn btn-link']) ?>
+    <?= anchor_back_to_index('/informations', lang('App.backToIndex'), 'informations', 'class="btn btn-link"') ?>
   </div>
 </div>
 <?= $this->endSection() ?>

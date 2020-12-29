@@ -2,12 +2,7 @@
 
 <?= $this->section('contents') ?>
 <div class="container-fluid">
-  <h1>
-    <?= lang('App.func.information') ?>
-    <span class="lead">
-      <?= lang('App.new') ?>
-    </span>
-  </h1>
+  <?= h1_title(lang('App.func.information'), lang('App.new')) ?>
   <?= form_open('/informations/create') ?>
   <?= $this->include('layouts/alert/success.html') ?>
   <?= $this->include('layouts/alert/error.html') ?>
@@ -16,12 +11,13 @@
   </div>
   <div class="my-3">
     <button class="btn btn-success">
+      <i class="fas fa-check"></i>
       <?= lang('App.create') ?>
     </button>
   </div>
   <?= form_close("\n") ?>
   <div class="my-3">
-    <?= anchor('/informations', lang('App.backToIndex'), ['class' => 'btn btn-link']) ?>
+    <?= anchor('/informations', lang('App.backToIndex'), 'class="btn btn-link"') ?>
   </div>
 </div>
 <?= $this->endSection() ?>

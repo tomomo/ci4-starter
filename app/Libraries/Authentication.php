@@ -160,7 +160,7 @@ class Authentication
 		}
 		return (object) [
 							'status'  => false,
-							'message' => 'App.auth.unsuccessfullyPasswordUpdated',
+							'message' => 'App.auth.unSuccessfullyPasswordUpdated',
 						];
 	}
 }

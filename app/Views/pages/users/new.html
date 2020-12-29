@@ -2,12 +2,7 @@
 
 <?= $this->section('contents') ?>
 <div class="container-fluid">
-  <h1>
-    <?= lang('App.func.user') ?>
-    <span class="lead">
-      <?= lang('App.new') ?>
-    </span>
-  </h1>
+  <?= h1_title(lang('App.func.user'), lang('App.new')) ?>
   <?= form_open('/users/create') ?>
   <?= $this->include('layouts/alert/success.html') ?>
   <?= $this->include('layouts/alert/error.html') ?>
@@ -31,11 +26,10 @@
       <label for="inputPassword" class="form-label">
         <?= lang('App.user.password') ?>
       </label>
-      <?= form_input([
+      <?= form_password([
           'class' => 'form-control' . (isset(session('error')->data->password) ? ' is-invalid' : ''),
           'id' => 'inputPassword',
           'name' => 'password',
-          'value' => old('password', $user->password ?? '')
         ]) ?>
       <div class="invalid-feedback">
         <?= session('error')->data->password ?? '' ?>
@@ -49,7 +43,7 @@
   </div>
   <?= form_close("\n") ?>
   <div class="my-3">
-    <?= anchor('/users', lang('App.backToIndex'), ['class' => 'btn btn-link']) ?>
+    <?= anchor('/users', lang('App.backToIndex'), 'class="btn btn-link"') ?>
   </div>
 </div>
 <?= $this->endSection() ?>

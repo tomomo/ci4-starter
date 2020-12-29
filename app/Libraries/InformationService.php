@@ -26,9 +26,9 @@ class InformationService
 	public function searchPage(array $params)
 	{
 		$sortFields = [
-			'subject'    => 'subject',
-			'created_at' => 'created_at',
-			'updated_at' => 'updated_at',
+			'subject'   => 'subject',
+			'createdAt' => 'created_at',
+			'updatedAt' => 'updated_at',
 		];
 
 		$information = model('InformationModel')
@@ -77,7 +77,7 @@ class InformationService
 		return (object)
 			[
 				'status'  => true,
-				'message' => lang('App.informations.successfullyCreated'),
+				'message' => lang('App.successfullyCreated'),
 				'data'    => (object)
 					[
 						'id' => $model->insertID(),
@@ -110,7 +110,7 @@ class InformationService
 		return (object)
 			[
 				'status'  => true,
-				'message' => lang('App.informations.successfullyUpdated'),
+				'message' => lang('App.successfullyUpdated'),
 			];
 	}
 
@@ -136,7 +136,7 @@ class InformationService
 		return (object)
 			[
 				'status'  => true,
-				'message' => lang('App.informations.successfullyDeleted'),
+				'message' => lang('App.successfullyDeleted'),
 			];
 	}
 }

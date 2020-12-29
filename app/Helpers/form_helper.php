@@ -7,6 +7,23 @@
  * @license http://www.opensource.org/licenses/mit-license.html  MIT License
  */
 
+if (! function_exists('h1_title'))
+{
+	/**
+	 * H1タイトル
+	 *
+	 * @param string $title    タイトル
+	 * @param string $subTitle サブタイトル
+	 *
+	 * @return string
+	 */
+	function h1_title(string $title, string $subTitle = '')
+	{
+		return '<h1 class="h3">' . $title . '<span class="lead">' . "\n" .
+			$subTitle . '</span></h1>' . "\n";
+	}
+}
+
 if (! function_exists('anchor_sort'))
 {
 	/**
@@ -36,13 +53,12 @@ if (! function_exists('anchor_sort'))
 			if (empty($params['o']) || $params['o'] === 'asc')
 			{
 				$p['o'] = 'desc';
-				$flag   = lang('App.sortAsc');
+				$flag   = '<i class="fas fa-sort-amount-up-alt"></i>';
 			}
 			else
 			{
 				unset($p['o']);
-				$flag = lang('App.sortDesc');
-				;
+				$flag = '<i class="fas fa-sort-amount-up"></i>';
 			}
 		}
 		else

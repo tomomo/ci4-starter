@@ -25,7 +25,7 @@ class ProfileService
 	 */
 	public function find(string $id)
 	{
-		return model('UserModel')->find($id);
+		return model('UserModel')->asObject()->find($id);
 	}
 
 	/**

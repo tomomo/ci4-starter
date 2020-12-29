@@ -24,14 +24,14 @@ class UserService
 	 *
 	 * @return object
 	 */
-	public function searchPage(array $params, $loginUser)
+	public function searchPage(array $params, object $loginUser)
 	{
 		$excludeUserId = $loginUser->id;
 		$sortFields    = [
-			'email'      => 'email',
-			'name'       => 'name_kana',
-			'created_at' => 'created_at',
-			'updated_at' => 'updated_at',
+			'email'     => 'email',
+			'name'      => 'name_kana',
+			'createdAt' => 'created_at',
+			'updatedAt' => 'updated_at',
 		];
 
 		$user = model('UserModel')
@@ -78,7 +78,7 @@ class UserService
 		return (object)
 			[
 				'status'  => true,
-				'message' => lang('App.users.successfullyCreated'),
+				'message' => lang('App.successfullyCreated'),
 				'data'    => (object)
 					[
 						'id' => $model->insertID(),
@@ -111,7 +111,7 @@ class UserService
 		return (object)
 			[
 				'status'  => true,
-				'message' => lang('App.users.successfullyUpdated'),
+				'message' => lang('App.successfullyUpdated'),
 			];
 	}
 
@@ -137,7 +137,7 @@ class UserService
 		return (object)
 			[
 				'status'  => true,
-				'message' => lang('App.users.successfullyDeleted'),
+				'message' => lang('App.successfullyDeleted'),
 			];
 	}
 }

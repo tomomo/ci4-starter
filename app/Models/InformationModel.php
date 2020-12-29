@@ -33,7 +33,7 @@ class InformationModel extends BaseModel
 	 *
 	 * @var $returnType
 	 */
-	protected $returnType = 'object';
+	protected $returnType = 'App\Entities\Information';
 	/**
 	 * 論理削除フラグ
 	 *
@@ -67,7 +67,7 @@ class InformationModel extends BaseModel
 		],
 		'message' => [
 			'label' => 'App.information.message',
-			'rules' => 'required|max_length[100]',
+			'rules' => 'required|max_length[800]',
 		],
 	];
 

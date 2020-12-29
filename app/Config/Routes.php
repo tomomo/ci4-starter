@@ -39,14 +39,12 @@ $routes->get('/forget', 'Auth::showForgetPasswordPage', ['as' => 'forget']);
 $routes->post('/forget', 'Auth::sendMailRequestResetPassword');
 $routes->get('/resetpassword', 'Auth::showResetPasswordPage', ['as' => 'resetpassword']);
 $routes->post('/resetpassword', 'Auth::resetPassword');
-$routes->get('/profile', 'Auth::showProfilePage', ['as' => 'profile']);
-$routes->post('/profile', 'Auth::updateProfile');
+
+$routes->get('/profiles/edit', 'Profiles::edit', ['as' => 'profile']);
+$routes->post('/profiles/update', 'Profiles::update');
 
 $routes->presenter('informations', ['controller' => 'Informations']);
-$routes->resource('api/informations', [
-	'controller' => 'Api\Informations',
-	'except' => 'new,edit'
-]);
+$routes->resource('api/informations', ['controller' => 'Api\Informations', 'except' => 'new,edit']);
 
 $routes->presenter('users', ['controller' => 'Users']);
 
