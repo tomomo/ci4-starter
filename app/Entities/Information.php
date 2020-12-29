@@ -10,11 +10,11 @@
 namespace App\Entities;
 
 /**
- * User Entity Class
+ * Information Entity Class
  *
  * @package Entity
  */
-class User extends \CodeIgniter\Entity
+class Information extends \CodeIgniter\Entity
 {
 	/**
 	 * データマップ
@@ -24,11 +24,8 @@ class User extends \CodeIgniter\Entity
 	 * @var $datamap
 	 */
 	protected $datamap = [
-		'nameKana'        => 'name_kana',
-		'rememberToken'   => 'remember_token',
-		'rememberTokenAt' => 'remember_token_at',
-		'createdAt'       => 'created_at',
-		'updatedAt'       => 'updated_at',
-		'deletedAt'       => 'deleted_at',
+		'createdAt' => 'created_at',
+		'updatedAt' => 'updated_at',
+		'deletedAt' => 'deleted_at',
 	];
 }
