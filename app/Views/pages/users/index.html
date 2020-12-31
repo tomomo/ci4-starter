@@ -2,7 +2,7 @@
 
 <?= $this->section('contents') ?>
 <div class="container-fluid">
-  <?= h1_title(lang('App.func.information'), lang('App.index')) ?>
+  <?= h1_title(lang('App.func.user'), lang('App.index')) ?>
   <?= $this->include('layouts/alert/success.html') ?>
   <?= $this->include('layouts/alert/error.html') ?>
   <div class="card my-1">
@@ -12,7 +12,7 @@
         <?= form_input([
           'class' => 'form-control',
           'name' => 'text',
-          'placeholder' => lang('App.information.searchTextPlaceholder'),
+          'placeholder' => lang('App.user.searchTextPlaceholder'),
           'value' => $params['text'] ?? '',
         ]) ?>
       </div>
@@ -23,22 +23,22 @@
           <i class="fas fa-search"></i>
           <?= lang('App.search') ?>
         </button>
-        <?= anchor('/informations', lang('App.reset'), 'class="btn btn-secondary"') ?>
+        <?= anchor('/users', lang('App.reset'), 'class="btn btn-secondary"') ?>
       </div>
     </div>
     <?= form_close() ?>
   </div>
   <div class="my-2">
-    <?= anchor('/informations/new', '<i class="fas fa-edit"></i>' . lang('App.new'), 'class="btn btn-link"') ?>
+    <?= anchor('/users/new', '<i class="fas fa-edit"></i>' . lang('App.new'), 'class="btn btn-link"') ?>
   </div>
   <div class="d-flex flex-column flex-sm-row justify-content-sm-between">
     <div class="my-2">
       <p>
-        <?= $information->total ?>
+        <?= $user->total ?>
       </p>
     </div>
     <div class="my-2">
-      <?= $information->pager->links() ?>
+      <?= $user->pager->links() ?>
     </div>
   </div>
   <table class="table table-bordered table-light">
@@ -47,30 +47,36 @@
         <th scope="col">
         </th>
         <th scope="col">
-          <?= anchor_sort('/informations', $params, 'subject', lang('App.information.subject')) ?>
+          <?= anchor_sort('/users', $params, 'email', lang('App.user.email')) ?>
         </th>
         <th scope="col">
-          <?= anchor_sort('/informations', $params, 'createdAt', lang('App.createdAt')) ?>
+          <?= anchor_sort('/users', $params, 'name', lang('App.user.name')) ?>
         </th>
         <th scope="col">
-          <?= anchor_sort('/informations', $params, 'updatedAt', lang('App.updatedAt')) ?>
+          <?= anchor_sort('/users', $params, 'createdAt', lang('App.createdAt')) ?>
+        </th>
+        <th scope="col">
+          <?= anchor_sort('/users', $params, 'updatedAt', lang('App.updatedAt')) ?>
         </th>
       </tr>
     </thead>
     <tbody>
-      <? foreach($information->items as $item) : ?>
+      <? foreach($user->items as $item) : ?>
       <tr>
         <td scope="row">
-          <?= anchor('/informations/' . $item->id, '<i class="fas fa-edit"></i>') ?>
+          <?= anchor('/users/' . $item->id, '<i class="fas fa-edit"></i>') ?>
         </td>
         <td>
-          <?= \esc($item->subject) ?>
+          <?= $item->email ?>
         </td>
         <td>
-          <?= $item->createdAt ?>
+          <?= \esc($item->name) ?>
         </td>
         <td>
-          <?= $item->updatedAt ?>
+          <?= $item->created_at ?>
+        </td>
+        <td>
+          <?= $item->updated_at ?>
         </td>
       </tr>
       <? endforeach; ?>

@@ -1,0 +1,21 @@
+<?= $this->extend('layouts/base.html') ?>
+
+<?= $this->section('contents') ?>
+<div class="container-fluid">
+  <?= h1_title(lang('App.func.user'), lang('App.show')) ?>
+  <div class="my-2">
+    <?= anchor('/users/edit/' . $user->id, lang('App.edit'), 'class="btn btn-link"') ?>
+    <?= anchor('/users/remove/' . $user->id, lang('App.remove'), 'class="btn btn-link"') ?>
+  </div>
+  <?= form_open('/users/update/' . $user->id) ?>
+  <?= $this->include('layouts/alert/success.html') ?>
+  <?= $this->include('layouts/alert/error.html') ?>
+  <div class="row g-3">
+    <?= $this->include('pages/users/parts/read_form.html') ?>
+  </div>
+  <?= form_close("\n") ?>
+  <div class="my-3">
+    <?= anchor_back_to_index('/users', lang('App.backToIndex'), 'users', 'class="btn btn-link"') ?>
+  </div>
+</div>
+<?= $this->endSection() ?>

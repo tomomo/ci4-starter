@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Document</title>
+  <?= $this->include('layouts/styles.html') ?>
+  <style>
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      display: flex;
+      align-items: top;
+      padding-top: 60px;
+    }
+
+    form {
+      width: 100%;
+      max-width: 330px;
+      margin: auto;
+      padding-top: 30px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <?= $this->renderSection('contents') ?>
+  <?= $this->include('layouts/scripts.html') ?>
+</body>
+
+</html>

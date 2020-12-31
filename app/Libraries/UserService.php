@@ -10,48 +10,49 @@
 namespace App\Libraries;
 
 /**
- * InformationService Library Class
+ * UserService Library Class
  *
  * @package Library
  */
-class InformationService
+class UserService
 {
 	/**
-	 * データ取得
+	 * 一覧データ取得
 	 *
-	 * @param array $params パラメーター
+	 * @param array  $params    検索条件、ソート条件
+	 * @param object $loginUser ログインユーザー情報
 	 *
 	 * @return object
 	 */
-	public function searchPage(array $params)
+	public function searchPage(array $params, object $loginUser)
 	{
-		$sortFields = [
-			'subject'   => 'subject',
+		$excludeUserId = $loginUser->id;
+		$sortFields    = [
+			'email'     => 'email',
+			'name'      => 'name_kana',
 			'createdAt' => 'created_at',
 			'updatedAt' => 'updated_at',
 		];
 
-		$information = model('InformationModel')
+		$user = model('UserModel')
+			->exclude($excludeUserId)
 			->search($params)
 			->sort($sortFields, $params)
 			->page();
-		return $information;
+		return $user;
 	}
 
 	/**
-	 * データ取得
+	 * 単体データ取得（自身を除く）
 	 *
-	 * @param string $id ID
+	 * @param string $id        ID
+	 * @param object $loginUser ログインユーザー
 	 *
 	 * @return object
 	 */
-	public function find(string $id = null)
+	public function find(string $id, object $loginUser)
 	{
-		if (empty($id))
-		{
-			return null;
-		}
-		return model('InformationModel')->find($id);
+		return model('UserModel')->exclude($loginUser->id)->find($id);
 	}
 
 	/**
@@ -63,7 +64,7 @@ class InformationService
 	 */
 	public function create($data)
 	{
-		$model = model('InformationModel');
+		$model = model('UserModel');
 
 		if (! $model->insert($data))
 		{
@@ -95,7 +96,7 @@ class InformationService
 	 */
 	public function update(string $id, $data)
 	{
-		$model = model('InformationModel');
+		$model = model('UserModel');
 		$data  = compact('id') + (array) $data;
 
 		if (! $model->update($id, $data))
@@ -123,7 +124,7 @@ class InformationService
 	 */
 	public function delete(string $id)
 	{
-		$model = model('InformationModel');
+		$model = model('UserModel');
 		if (! $model->delete($id))
 		{
 			return (object)

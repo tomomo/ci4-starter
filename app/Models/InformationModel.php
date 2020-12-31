@@ -14,7 +14,7 @@ namespace App\Models;
  *
  * @package CodeIgniter
  */
-class InformationModel extends \CodeIgniter\Model
+class InformationModel extends BaseModel
 {
 	 /**
 	  * テーブル名
@@ -33,7 +33,7 @@ class InformationModel extends \CodeIgniter\Model
 	 *
 	 * @var $returnType
 	 */
-	protected $returnType = 'object';
+	protected $returnType = 'App\Entities\Information';
 	/**
 	 * 論理削除フラグ
 	 *
@@ -61,25 +61,15 @@ class InformationModel extends \CodeIgniter\Model
 	 * @var $allowedFields
 	 */
 	protected $validationRules = [
-		'subject' => 'required|max_length[100]',
-		'message' => 'required|max_length[800]',
+		'subject' => [
+			'label' => 'App.information.subject',
+			'rules' => 'required|max_length[100]',
+		],
+		'message' => [
+			'label' => 'App.information.message',
+			'rules' => 'required|max_length[800]',
+		],
 	];
-
-	/**
-	 * ページ単位出力
-	 *
-	 * @return object
-	 */
-	public function page()
-	{
-		$total = $this->countAllResults(false);
-		$data  = (object) [
-							  'total' => $total,
-							  'items' => $this->paginate(),
-							  'pager' => $this->pager,
-						  ];
-		return $data;
-	}
 
 	/**
 	 * 汎用的検索クエリ
@@ -100,30 +90,6 @@ class InformationModel extends \CodeIgniter\Model
 				->orLike($table . '.subject', $str)
 				->orLike($table . '.message', $str)
 				->groupEnd();
-		}
-		return $this;
-	}
-
-	/**
-	 * ソート
-	 *
-	 * @param array $params ソート条件 $params s:対象項目
-	 *                                         o:昇順/降順
-	 *
-	 * @return object InformationModel
-	 */
-	public function sort(array $params = null)
-	{
-		if (! isset($params['s']))
-		{
-			return $this;
-		}
-		$sort = $params['s'];
-		if (in_array(mb_strtolower($sort), ['subject', 'created_at', 'updated_at']))
-		{
-			$order = mb_strtolower($params['o'] ?? null);
-			$order = (in_array($order, ['asc', 'desc'])) ? $order : 'asc';
-			$this->orderBy($sort, $order);
 		}
 		return $this;
 	}

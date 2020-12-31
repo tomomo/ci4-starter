@@ -2,27 +2,20 @@
 
 <?= $this->section('contents') ?>
 <div class="container-fluid">
-  <h1>
-    <?= lang('App.func.information') ?>
-    <span class="lead">
-      <?= lang('App.show') ?>
-    </span>
-  </h1>
+  <?= h1_title(lang('App.func.information'), lang('App.show')) ?>
   <div class="my-2">
-    <a class="btn btn-link" href="/informations/edit/<?= $information->id ?>">
-      <?= lang('App.edit') ?>
-    </a>
-    <a class="btn btn-link" href="/informations/remove/<?= $information->id ?>">
-      <?= lang('App.remove') ?>
-    </a>
+    <?= anchor('/informations/edit/' . $information->id, lang('App.edit'), 'class="btn btn-link"') ?>
+    <?= anchor('/informations/remove/' . $information->id, lang('App.remove'), 'class="btn btn-link"') ?>
   </div>
   <?= form_open('/informations/update/' . $information->id) ?>
   <?= $this->include('layouts/alert/success.html') ?>
   <?= $this->include('layouts/alert/error.html') ?>
-  <?= $this->include('pages/informations/parts/read_form.html') ?>
+  <div class="row g-3">
+    <?= $this->include('pages/informations/parts/read_form.html') ?>
+  </div>
   <?= form_close("\n") ?>
   <div class="my-3">
-    <?= $this->include('pages/informations/parts/index_link.html') ?>
+    <?= anchor_back_to_index('/informations', lang('App.backToIndex'), 'informations', 'class="btn btn-link"') ?>
   </div>
 </div>
 <?= $this->endSection() ?>

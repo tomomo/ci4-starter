@@ -1,0 +1,33 @@
+<?= $this->extend('layouts/base.html') ?>
+
+<?= $this->section('contents') ?>
+<div class="container-fluid">
+  <?= h1_title(lang('App.func.profile')) ?>
+  <?= form_open('/profiles/update') ?>
+  <?= $this->include('layouts/alert/success.html') ?>
+  <?= $this->include('layouts/alert/error.html') ?>
+  <div class="row g-3">
+    <div class="col-12">
+      <label for="inputEmail" class="form-label">
+        <?= lang('App.user.email') ?>
+      </label>
+      <?= form_input([
+          'class' => 'form-control' . (isset(session('error')->data->email) ? ' is-invalid' : ''),
+          'id' => 'inputEmail',
+          'name' => 'email',
+          'value' => old('email', $user->email ?? '')
+        ]) ?>
+      <div class="invalid-feedback">
+        <?= session('error')->data->email ?? '' ?>
+      </div>
+    </div>
+    <?= $this->include('pages/users/parts/input_form.html') ?>
+  </div>
+  <div class="my-3">
+    <button class="btn btn-success">
+      <?= lang('App.update') ?>
+    </button>
+  </div>
+  <?= form_close("\n") ?>
+</div>
+<?= $this->endSection() ?>

@@ -1,0 +1,20 @@
+<?= $this->extend('layouts/base.html') ?>
+
+<?= $this->section('contents') ?>
+<div class="jumbotron p-3 bg-light">
+  <h1 class="display-5">
+    <?= lang('App.title') ?>
+  </h1>
+  <p class="lead">
+    <?= lang('App.description') ?>
+  </p>
+</div>
+<div class="container-fluid">
+  <div class="card card-body my-3">
+    <h5 class="card-title">User-session</h5>
+    <p class="card-text">
+      <?= var_dump(session('loggedin')) ?>
+    </p>
+  </div>
+</div>
+<?= $this->endSection('contents') ?>

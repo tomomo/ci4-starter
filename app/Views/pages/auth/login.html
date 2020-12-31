@@ -1,0 +1,68 @@
+<?= $this->extend('pages/auth/base.html') ?>
+
+<?= $this->section('contents') ?>
+<div class="container text-center">
+  <?= h1_title(lang('App.login')) ?>
+  <?= form_open('/login') ?>
+  <?= $this->include('layouts/alert/success.html') ?>
+  <?= $this->include('layouts/alert/error.html') ?>
+  <?= form_input([
+    'class' => 'form-control',
+    'autofocus' => true,
+    'name' => 'account',
+    'placeholder' => lang('App.acctountPlaceholder'),
+    'value' => old('account', ''),
+  ]) ?>
+  <?= form_password([
+    'class' => 'form-control',
+    'autocomplate' => 'off',
+    'placeholder' => lang('App.passwordPlaceholder'),
+    'name' => 'password',
+  ]) ?>
+  <div class="my-2">
+    <button class="btn btn-primary btn-lg btn-block w-100">
+      <?= lang('App.login') ?>
+    </button>
+  </div>
+  <div class="my-2">
+    <a class="btn btn-link" href="/forget">
+      <?= lang('App.forget') ?>
+    </a>
+  </div>
+  <?= form_close() ?>
+</div>
+<footer class="footer py-3 fixed-bottom">
+  <div class="container text-center">
+    Copyright
+  </div>
+</footer>
+<?= $this->endSection() ?>
+
+
+<?= $this->section('styles') ?>
+<style>
+  form .form-control {
+    position: relative;
+  }
+
+  form .form-control:focus {
+    z-index: 2;
+  }
+
+  form input[name="account"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  form input[name="password"] {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  footer {
+    background-color: #f3f3f3;
+  }
+
+</style>
+<?= $this->endSection() ?>

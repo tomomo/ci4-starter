@@ -1,0 +1,49 @@
+<?= $this->extend('layouts/base.html') ?>
+
+<?= $this->section('contents') ?>
+<div class="container-fluid">
+  <?= h1_title(lang('App.func.user'), lang('App.new')) ?>
+  <?= form_open('/users/create') ?>
+  <?= $this->include('layouts/alert/success.html') ?>
+  <?= $this->include('layouts/alert/error.html') ?>
+  <div class="row g-3">
+    <div class="col-12">
+      <label for="inputEmail" class="form-label">
+        <?= lang('App.user.email') ?>
+      </label>
+      <?= form_input([
+          'class' => 'form-control' . (isset(session('error')->data->email) ? ' is-invalid' : ''),
+          'id' => 'inputEmail',
+          'name' => 'email',
+          'value' => old('email', $user->email ?? '')
+        ]) ?>
+      <div class="invalid-feedback">
+        <?= session('error')->data->email ?? '' ?>
+      </div>
+    </div>
+    <?= $this->include('pages/users/parts/input_form.html') ?>
+    <div class="col-12 col-md-6">
+      <label for="inputPassword" class="form-label">
+        <?= lang('App.user.password') ?>
+      </label>
+      <?= form_password([
+          'class' => 'form-control' . (isset(session('error')->data->password) ? ' is-invalid' : ''),
+          'id' => 'inputPassword',
+          'name' => 'password',
+        ]) ?>
+      <div class="invalid-feedback">
+        <?= session('error')->data->password ?? '' ?>
+      </div>
+    </div>
+  </div>
+  <div class="my-3">
+    <button class="btn btn-success">
+      <?= lang('App.create') ?>
+    </button>
+  </div>
+  <?= form_close("\n") ?>
+  <div class="my-3">
+    <?= anchor('/users', lang('App.backToIndex'), 'class="btn btn-link"') ?>
+  </div>
+</div>
+<?= $this->endSection() ?>

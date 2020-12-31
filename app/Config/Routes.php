@@ -30,13 +30,23 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+$routes->get('/', 'Home::index', ['as' => 'home']);
+
+$routes->get('/login', 'Auth::showLoginPage', ['as' => 'login']);
+$routes->post('/login', 'Auth::login');
+$routes->get('/logout', 'Auth::logout', ['as' => 'logout']);
+$routes->get('/forget', 'Auth::showForgetPasswordPage', ['as' => 'forget']);
+$routes->post('/forget', 'Auth::sendMailRequestResetPassword');
+$routes->get('/resetpassword', 'Auth::showResetPasswordPage', ['as' => 'resetpassword']);
+$routes->post('/resetpassword', 'Auth::resetPassword');
+
+$routes->get('/profiles/edit', 'Profiles::edit', ['as' => 'profile']);
+$routes->post('/profiles/update', 'Profiles::update');
 
 $routes->presenter('informations', ['controller' => 'Informations']);
-$routes->resource('api/informations', [
-	'controller' => 'Api\Informations',
-	'except' => 'new,edit'
-]);
+$routes->resource('api/informations', ['controller' => 'Api\Informations', 'except' => 'new,edit']);
+
+$routes->presenter('users', ['controller' => 'Users']);
 
 /**
  * --------------------------------------------------------------------

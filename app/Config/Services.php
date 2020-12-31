@@ -17,6 +17,24 @@ use CodeIgniter\Config\Services as CoreServices;
  */
 class Services extends CoreServices
 {
+	public static function authentication($getShared = true)
+	{
+		if ($getShared)
+		{
+			return static::getSharedInstance('authentication');
+		}
+		return new \App\Libraries\Authentication();
+	}
+
+	public static function profileService($getShared = true)
+	{
+		if ($getShared)
+		{
+			return static::getSharedInstance('profileService');
+		}
+		return new \App\Libraries\ProfileService();
+	}
+
 	public static function informationService($getShared = true)
 	{
 		if ($getShared)
@@ -24,5 +42,14 @@ class Services extends CoreServices
 			return static::getSharedInstance('informationService');
 		}
 		return new \App\Libraries\InformationService();
+	}
+
+	public static function userService($getShared = true)
+	{
+		if ($getShared)
+		{
+			return static::getSharedInstance('userService');
+		}
+		return new \App\Libraries\UserService();
 	}
 }

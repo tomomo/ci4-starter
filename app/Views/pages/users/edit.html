@@ -1,0 +1,33 @@
+<?= $this->extend('layouts/base.html') ?>
+
+<?= $this->section('contents') ?>
+<div class="container-fluid">
+  <?= h1_title(lang('App.func.user'), lang('App.edit')) ?>
+  <div class="my-2">
+    <?= anchor('/users/' . $user->id, lang('App.show'), 'class="btn btn-link"') ?>
+  </div>
+  <?= form_open('/users/update/' . $user->id, ['class' => 'form-floating']) ?>
+  <?= $this->include('layouts/alert/success.html') ?>
+  <?= $this->include('layouts/alert/error.html') ?>
+  <div class="row g-3">
+    <div class="col-12">
+      <label for="inputEmail" class="form-label">
+        <?= lang('App.user.email') ?>
+      </label>
+      <div class="p-2">
+        <?= esc($user->email ?? '') ?>
+      </div>
+    </div>
+    <?= $this->include('pages/users/parts/input_form.html') ?>
+  </div>
+  <div class="my-3">
+    <button class="btn btn-success">
+      <?= lang('App.update') ?>
+    </button>
+  </div>
+  <?= form_close("\n") ?>
+  <div class="my-3">
+    <?= anchor_back_to_index('/users', lang('App.backToIndex'), 'users', 'class="btn btn-link"') ?>
+  </div>
+</div>
+<?= $this->endSection() ?>
