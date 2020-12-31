@@ -44,6 +44,7 @@ class Auth extends BaseController
 		$authenticationed = service('authentication')->login($account, $password);
 		if ($authenticationed->status)
 		{
+			// @REVIEW 個人設定の其れと被る
 			session()->set(['loggedin' => $authenticationed->data]);
 			return redirect()
 				->to('/')

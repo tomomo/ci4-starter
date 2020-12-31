@@ -47,4 +47,21 @@ class Rules
 		}
 		return preg_match('/^[ァ-ヶー　 ]+$/u', $str);
 	}
+
+	/**
+	 * パスワードルール
+	 *
+	 * @param string $password パスワード
+	 *
+	 * @return boolean
+	 */
+	public function password(string $password): bool
+	{
+		// 半角英小文字大文字数字をそれぞれ1種類以上含む8文字以上30文字以下
+		$pattern = '/\A(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,30}+\z/';
+		// 半角英数字記号をそれぞれ1種類以上含む8文字以上30文字以下
+		// $pattern = '/\A(?=.*?[a-z])(?=.*?\d)(?=.*?[!-\/:-@[-`{-~])[!-~]{8,30}+\z/i';
+		return (preg_match($pattern, $password));
+	}
+
 }

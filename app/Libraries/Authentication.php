@@ -26,7 +26,7 @@ class Authentication
 	 */
 	public function login(string $account = null, string $password = null)
 	{
-		$user = model('UserModel')->asObject()->findByEmail($account);
+		$user = model('UserModel')->findByEmail($account);
 		if (! ($user && password_verify($password, $user->password)))
 		{
 			return (object)
@@ -35,13 +35,17 @@ class Authentication
 					'message' => lang('App.unauthorized'),
 				];
 		}
-		// phpcs:ignore
-		unset($user->password, $user->remember_token, $user->remember_token_at);
+		$loginUser = new \App\Entities\LoginUser([
+			'id'    => $user->id,
+			'name'  => $user->name,
+			'email' => $user->email,
+		]);
+
 		return (object)
 			[
 				'status'  => true,
 				'message' => lang('App.authorized'),
-				'data'    => $user,
+				'data'    => $loginUser,
 			];
 	}
 
@@ -137,7 +141,7 @@ class Authentication
 		$validation = service('validation');
 
 		$params = compact('password');
-		$validation->setRule('password', lang('App.user.password'), 'required');
+		$validation->setRule('password', lang('App.user.password'), 'required|password');
 		if (! $validation->run($params))
 		{
 			return (object) [

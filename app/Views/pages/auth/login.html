@@ -1,10 +1,8 @@
 <?= $this->extend('pages/auth/base.html') ?>
 
 <?= $this->section('contents') ?>
-<div class="container w-50 text-center">
-  <h1>
-    <?= lang('App.login') ?>
-  </h1>
+<div class="container text-center">
+  <?= h1_title(lang('App.login')) ?>
   <?= form_open('/login') ?>
   <?= $this->include('layouts/alert/success.html') ?>
   <?= $this->include('layouts/alert/error.html') ?>
@@ -33,6 +31,11 @@
   </div>
   <?= form_close() ?>
 </div>
+<footer class="footer py-3 fixed-bottom">
+  <div class="container text-center">
+    Copyright
+  </div>
+</footer>
 <?= $this->endSection() ?>
 
 
@@ -55,6 +58,10 @@
   form input[name="password"] {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+  }
+
+  footer {
+    background-color: #f3f3f3;
   }
 
 </style>

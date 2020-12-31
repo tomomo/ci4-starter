@@ -44,15 +44,15 @@
   <table class="table table-bordered table-light">
     <thead class="table-light">
       <tr>
-        <th>
+        <th scope="col">
         </th>
-        <th>
+        <th scope="col">
           <?= anchor_sort('/informations', $params, 'subject', lang('App.information.subject')) ?>
         </th>
-        <th>
+        <th scope="col">
           <?= anchor_sort('/informations', $params, 'createdAt', lang('App.createdAt')) ?>
         </th>
-        <th>
+        <th scope="col">
           <?= anchor_sort('/informations', $params, 'updatedAt', lang('App.updatedAt')) ?>
         </th>
       </tr>
@@ -60,7 +60,7 @@
     <tbody>
       <? foreach($information->items as $item) : ?>
       <tr>
-        <td>
+        <td scope="row">
           <?= anchor('/informations/' . $item->id, '<i class="fas fa-edit"></i>') ?>
         </td>
         <td>

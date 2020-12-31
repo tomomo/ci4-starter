@@ -44,18 +44,18 @@
   <table class="table table-bordered table-light">
     <thead class="table-light">
       <tr>
-        <th>
+        <th scope="col">
         </th>
-        <th>
+        <th scope="col">
           <?= anchor_sort('/users', $params, 'email', lang('App.user.email')) ?>
         </th>
-        <th>
+        <th scope="col">
           <?= anchor_sort('/users', $params, 'name', lang('App.user.name')) ?>
         </th>
-        <th>
+        <th scope="col">
           <?= anchor_sort('/users', $params, 'createdAt', lang('App.createdAt')) ?>
         </th>
-        <th>
+        <th scope="col">
           <?= anchor_sort('/users', $params, 'updatedAt', lang('App.updatedAt')) ?>
         </th>
       </tr>
@@ -63,7 +63,7 @@
     <tbody>
       <? foreach($user->items as $item) : ?>
       <tr>
-        <td>
+        <td scope="row">
           <?= anchor('/users/' . $item->id, '<i class="fas fa-edit"></i>') ?>
         </td>
         <td>
